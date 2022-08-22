@@ -157,7 +157,7 @@ fun Rango() {
     }
 }
 
-fun tirarRango(valorInicial: Int, valorFinal: Int): MutableList<Int> {
+fun tirarRango(valorInicial: Int, valorFinal: Int): List<Int> {
     val inicio = min(valorInicial, valorFinal)
     val final = max(valorInicial, valorFinal)
     return numerosAleatorios(inicio, final)

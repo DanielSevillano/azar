@@ -88,6 +88,6 @@ fun Dado() {
     }
 }
 
-fun tirarDados(): MutableList<Int> {
+fun tirarDados(): List<Int> {
     return numerosAleatorios(final = 6)
 }

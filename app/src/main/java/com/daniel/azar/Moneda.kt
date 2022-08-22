@@ -84,6 +84,6 @@ fun Moneda() {
     }
 }
 
-fun tirarMonedas(): MutableList<Int> {
+fun tirarMonedas(): List<Int> {
     return numerosAleatorios(final = 2)
 }

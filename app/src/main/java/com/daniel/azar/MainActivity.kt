@@ -195,9 +195,8 @@ val destinos = listOf(
     Destino.Rango
 )
 
-fun numerosAleatorios(inicio: Int = 1, final: Int): MutableList<Int> {
+fun numerosAleatorios(inicio: Int = 1, final: Int): List<Int> {
     val semilla = SimpleDateFormat("HHmmssSSS", Locale.FRENCH).format(Date()).toInt()
-    val valoresAleatorios = mutableListOf<Int>()
-    for (i in (1..3)) valoresAleatorios.add(Random(semilla * i).nextInt(inicio, final + 1))
-    return valoresAleatorios
+    val generador = Random(semilla)
+    return List(3) { generador.nextInt(inicio, final + 1) }
 }
