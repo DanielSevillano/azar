@@ -27,7 +27,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.daniel.azar.ui.theme.AzarTheme
+import com.daniel.azar.ui.theme.AppTheme
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.random.Random
@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AzarTheme {
+            AppTheme {
                 val navController = rememberNavController()
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val destinoActual = navBackStackEntry?.destination
