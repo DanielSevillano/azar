@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
@@ -79,23 +80,29 @@ fun Rango() {
                 textoInicio = TextFieldValue("")
                 textoFinal = TextFieldValue("")
             }) {
-                Icon(imageVector = Icons.Filled.Clear, contentDescription = "Borrar")
+                Icon(
+                    imageVector = Icons.Filled.Clear,
+                    contentDescription = stringResource(id = R.string.borrar)
+                )
             }
 
             Column {
                 FilledIconButton(onClick = { desplegableExpandido = true }) {
-                    Icon(imageVector = Icons.Filled.ArrowDropDown, contentDescription = "Desplegar")
+                    Icon(
+                        imageVector = Icons.Filled.ArrowDropDown,
+                        contentDescription = stringResource(id = R.string.desplegar)
+                    )
                 }
 
                 DropdownMenu(
                     expanded = desplegableExpandido,
                     onDismissRequest = { desplegableExpandido = false }) {
-                    DropdownMenuItem(text = { Text(text = "1 - 10") }, onClick = {
+                    DropdownMenuItem(text = { Text(text = "1 — 10") }, onClick = {
                         textoInicio = TextFieldValue("1")
                         textoFinal = TextFieldValue("10")
                         desplegableExpandido = false
                     })
-                    DropdownMenuItem(text = { Text(text = "1 - 100") }, onClick = {
+                    DropdownMenuItem(text = { Text(text = "1 — 100") }, onClick = {
                         textoInicio = TextFieldValue("1")
                         textoFinal = TextFieldValue("100")
                         desplegableExpandido = false
@@ -136,7 +143,10 @@ fun Rango() {
                 },
                 enabled = rangoDefinido
             ) {
-                Icon(imageVector = Icons.Filled.Pin, contentDescription = "Número aleatorio")
+                Icon(
+                    imageVector = Icons.Filled.Pin,
+                    contentDescription = stringResource(id = R.string.tirar_rango)
+                )
             }
 
             Row {
@@ -151,7 +161,10 @@ fun Rango() {
             }
 
             FilledTonalIconButton(onClick = { valoresRango = listOf(null, null, null) }) {
-                Icon(imageVector = Icons.Filled.ClearAll, contentDescription = "Borrar")
+                Icon(
+                    imageVector = Icons.Filled.ClearAll,
+                    contentDescription = stringResource(id = R.string.borrar)
+                )
             }
         }
     }

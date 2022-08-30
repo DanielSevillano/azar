@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Azar</string>
+
+    <string name="destino_dado">Dado</string>
+    <string name="destino_moneda">Moneda</string>
+    <string name="destino_rango">Rango</string>
+
+    <string name="tirar_dado">Tirar dado</string>
+    <string name="tirar_moneda">Tirar moneda</string>
+    <string name="tirar_rango">Número aleatorio</string>
+
+    <string name="borrar">Borrar</string>
+    <string name="desplegar">Desplegar</string>
 </resources>

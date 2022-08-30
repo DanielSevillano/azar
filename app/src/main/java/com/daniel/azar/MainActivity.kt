@@ -4,13 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Casino
-import androidx.compose.material.icons.filled.MonetizationOn
-import androidx.compose.material.icons.filled.Pin
-import androidx.compose.material.icons.outlined.Casino
-import androidx.compose.material.icons.outlined.MonetizationOn
-import androidx.compose.material.icons.outlined.Pin
 import androidx.compose.material3.*
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
@@ -18,8 +11,9 @@ import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -64,11 +58,11 @@ class MainActivity : ComponentActivity() {
                                         icon = {
                                             Icon(
                                                 imageVector = if (destinoSeleccionado) destino.iconoSeleccionado else destino.icono,
-                                                contentDescription = destino.ruta
+                                                contentDescription = stringResource(id = destino.nombreId)
                                             )
                                         },
                                         label = {
-                                            Text(text = destino.ruta)
+                                            Text(text = stringResource(id = destino.nombreId))
                                         })
                                 }
                             }
@@ -82,87 +76,15 @@ class MainActivity : ComponentActivity() {
                         color = MaterialTheme.colorScheme.background
                     ) {
                         when (dimensionesVentana.widthSizeClass) {
-                            WindowWidthSizeClass.Expanded -> {
-                                PermanentNavigationDrawer(drawerContent = {
-                                    PermanentDrawerSheet(modifier = Modifier.padding(horizontal = 12.dp)) {
-                                        Spacer(modifier = Modifier.height(8.dp))
-
-                                        destinos.forEach { seccion ->
-                                            val seleccionado =
-                                                destinoActual?.hierarchy?.any { it.route == seccion.ruta } == true
-                                            NavigationDrawerItem(
-                                                selected = seleccionado,
-                                                onClick = {
-                                                    navController.navigate(seccion.ruta) {
-                                                        popUpTo(navController.graph.findStartDestination().id) {
-                                                            saveState = true
-                                                        }
-                                                        launchSingleTop = true
-                                                        restoreState = true
-                                                    }
-                                                },
-                                                icon = {
-                                                    Icon(
-                                                        imageVector = if (seleccionado) seccion.iconoSeleccionado else seccion.icono,
-                                                        contentDescription = seccion.ruta,
-                                                        tint = MaterialTheme.colorScheme.onBackground
-                                                    )
-                                                },
-                                                label = {
-                                                    Text(
-                                                        text = seccion.ruta
-                                                    )
-                                                }
-                                            )
-                                        }
-                                    }
-                                }) {
-                                    Navegacion(navController = navController)
-                                }
-                            }
-                            WindowWidthSizeClass.Medium -> {
-                                Row {
-                                    NavigationRail(modifier = Modifier.padding(top = 4.dp)) {
-                                        Spacer(Modifier.weight(1f))
-
-                                        destinos.forEach { seccion ->
-                                            val seleccionado =
-                                                destinoActual?.hierarchy?.any { it.route == seccion.ruta } == true
-                                            NavigationRailItem(
-                                                selected = seleccionado,
-                                                onClick = {
-                                                    navController.navigate(seccion.ruta) {
-                                                        popUpTo(navController.graph.findStartDestination().id) {
-                                                            saveState = true
-                                                        }
-                                                        launchSingleTop = true
-                                                        restoreState = true
-                                                    }
-                                                },
-                                                icon = {
-                                                    Icon(
-                                                        imageVector = if (seleccionado) seccion.iconoSeleccionado else seccion.icono,
-                                                        contentDescription = seccion.ruta,
-                                                        tint = MaterialTheme.colorScheme.onBackground
-                                                    )
-                                                },
-                                                label = {
-                                                    Text(
-                                                        text = seccion.ruta
-                                                    )
-                                                }
-                                            )
-                                        }
-
-                                        Spacer(Modifier.weight(1f))
-                                    }
-
-                                    Navegacion(navController = navController)
-                                }
-                            }
-                            else -> {
-                                Navegacion(navController = navController)
-                            }
+                            WindowWidthSizeClass.Expanded -> PantallaExpandida(
+                                navController = navController,
+                                destinoActual = destinoActual
+                            )
+                            WindowWidthSizeClass.Medium -> PantallaMediana(
+                                navController = navController,
+                                destinoActual = destinoActual
+                            )
+                            else -> Navegacion(navController = navController)
                         }
                     }
                 }
@@ -177,23 +99,94 @@ fun Navegacion(navController: NavHostController) {
         navController = navController,
         startDestination = destinos.first().ruta
     ) {
-        composable("Dado") { Dado() }
-        composable("Moneda") { Moneda() }
-        composable("Rango") { Rango() }
+        composable("dado") { Dado() }
+        composable("moneda") { Moneda() }
+        composable("rango") { Rango() }
     }
 }
 
-sealed class Destino(val ruta: String, val icono: ImageVector, val iconoSeleccionado: ImageVector) {
-    object Dado : Destino("Dado", Icons.Outlined.Casino, Icons.Filled.Casino)
-    object Moneda : Destino("Moneda", Icons.Outlined.MonetizationOn, Icons.Filled.MonetizationOn)
-    object Rango : Destino("Rango", Icons.Outlined.Pin, Icons.Filled.Pin)
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun PantallaExpandida(navController: NavHostController, destinoActual: NavDestination?) {
+    PermanentNavigationDrawer(drawerContent = {
+        PermanentDrawerSheet(modifier = Modifier.padding(horizontal = 12.dp)) {
+            Spacer(modifier = Modifier.height(8.dp))
+
+            destinos.forEach { destino ->
+                val seleccionado =
+                    destinoActual?.hierarchy?.any { it.route == destino.ruta } == true
+                NavigationDrawerItem(
+                    selected = seleccionado,
+                    onClick = {
+                        navController.navigate(destino.ruta) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    },
+                    icon = {
+                        Icon(
+                            imageVector = if (seleccionado) destino.iconoSeleccionado else destino.icono,
+                            contentDescription = stringResource(id = destino.nombreId),
+                            tint = MaterialTheme.colorScheme.onBackground
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = stringResource(id = destino.nombreId)
+                        )
+                    }
+                )
+            }
+        }
+    }) {
+        Navegacion(navController = navController)
+    }
 }
 
-val destinos = listOf(
-    Destino.Dado,
-    Destino.Moneda,
-    Destino.Rango
-)
+@Composable
+fun PantallaMediana(navController: NavHostController, destinoActual: NavDestination?) {
+    Row {
+        NavigationRail(modifier = Modifier.padding(top = 4.dp)) {
+            Spacer(Modifier.weight(1f))
+
+            destinos.forEach { destino ->
+                val seleccionado =
+                    destinoActual?.hierarchy?.any { it.route == destino.ruta } == true
+                NavigationRailItem(
+                    selected = seleccionado,
+                    onClick = {
+                        navController.navigate(destino.ruta) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    },
+                    icon = {
+                        Icon(
+                            imageVector = if (seleccionado) destino.iconoSeleccionado else destino.icono,
+                            contentDescription = stringResource(id = destino.nombreId),
+                            tint = MaterialTheme.colorScheme.onBackground
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = stringResource(id = destino.nombreId)
+                        )
+                    }
+                )
+            }
+
+            Spacer(Modifier.weight(1f))
+        }
+
+        Navegacion(navController = navController)
+    }
+}
 
 fun numerosAleatorios(inicio: Int = 1, final: Int): List<Int> {
     val semilla = SimpleDateFormat("HHmmssSSS", Locale.FRENCH).format(Date()).toInt()

@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 
 val dados = mapOf(
@@ -67,7 +68,10 @@ fun Dado() {
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             FilledIconButton(onClick = { valorDados = tirarDados() }) {
-                Icon(imageVector = Icons.Filled.Casino, contentDescription = "Tirar dado")
+                Icon(
+                    imageVector = Icons.Filled.Casino,
+                    contentDescription = stringResource(id = R.string.tirar_dado)
+                )
             }
 
             Row {
@@ -82,7 +86,10 @@ fun Dado() {
             }
 
             FilledTonalIconButton(onClick = { valorDados = listOf(0, 0, 0) }) {
-                Icon(imageVector = Icons.Filled.ClearAll, contentDescription = "Borrar")
+                Icon(
+                    imageVector = Icons.Filled.ClearAll,
+                    contentDescription = stringResource(id = R.string.borrar)
+                )
             }
         }
     }

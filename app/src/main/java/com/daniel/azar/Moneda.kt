@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 
 val monedas = mapOf(
@@ -63,7 +64,10 @@ fun Moneda() {
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             FilledIconButton(onClick = { valorMonedas = tirarMonedas() }) {
-                Icon(imageVector = Icons.Filled.MonetizationOn, contentDescription = "Tirar moneda")
+                Icon(
+                    imageVector = Icons.Filled.MonetizationOn,
+                    contentDescription = stringResource(id = R.string.tirar_moneda)
+                )
             }
 
             Row {
@@ -78,7 +82,10 @@ fun Moneda() {
             }
 
             FilledTonalIconButton(onClick = { valorMonedas = listOf(0, 0, 0) }) {
-                Icon(imageVector = Icons.Filled.ClearAll, contentDescription = "Borrar")
+                Icon(
+                    imageVector = Icons.Filled.ClearAll,
+                    contentDescription = stringResource(id = R.string.borrar)
+                )
             }
         }
     }
