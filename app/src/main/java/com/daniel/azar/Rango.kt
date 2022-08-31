@@ -32,6 +32,12 @@ fun Rango() {
     val rangoDefinido = (textoInicio != TextFieldValue("")) and (textoFinal != TextFieldValue(""))
     var desplegableExpandido by remember { mutableStateOf(false) }
 
+    fun tirarRango(valorInicial: Int, valorFinal: Int): List<Int> {
+        val inicio = min(valorInicial, valorFinal)
+        val final = max(valorInicial, valorFinal)
+        return numerosAleatorios(inicio, final)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -168,10 +174,4 @@ fun Rango() {
             }
         }
     }
-}
-
-fun tirarRango(valorInicial: Int, valorFinal: Int): List<Int> {
-    val inicio = min(valorInicial, valorFinal)
-    val final = max(valorInicial, valorFinal)
-    return numerosAleatorios(inicio, final)
 }

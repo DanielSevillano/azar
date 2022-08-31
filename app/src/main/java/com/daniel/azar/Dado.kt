@@ -17,20 +17,24 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 
-val dados = mapOf(
-    1 to R.drawable.dado_1,
-    2 to R.drawable.dado_2,
-    3 to R.drawable.dado_3,
-    4 to R.drawable.dado_4,
-    5 to R.drawable.dado_5,
-    6 to R.drawable.dado_6
-)
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Dado() {
     var numeroDados: Int by remember { mutableStateOf(value = 1) }
     var valorDados: List<Int> by remember { mutableStateOf(listOf(0, 0, 0)) }
+
+    val imagenesDados = mapOf(
+        1 to R.drawable.dado_1,
+        2 to R.drawable.dado_2,
+        3 to R.drawable.dado_3,
+        4 to R.drawable.dado_4,
+        5 to R.drawable.dado_5,
+        6 to R.drawable.dado_6
+    )
+
+    fun tirarDados(): List<Int> {
+        return numerosAleatorios(final = 6)
+    }
 
     Column(
         modifier = Modifier
@@ -51,7 +55,7 @@ fun Dado() {
                 val valorDado = valorDados[numeroDado]
                 Image(
                     painter = painterResource(
-                        id = dados.getOrDefault(
+                        id = imagenesDados.getOrDefault(
                             valorDado,
                             R.drawable.dado_0
                         )
@@ -93,8 +97,4 @@ fun Dado() {
             }
         }
     }
-}
-
-fun tirarDados(): List<Int> {
-    return numerosAleatorios(final = 6)
 }

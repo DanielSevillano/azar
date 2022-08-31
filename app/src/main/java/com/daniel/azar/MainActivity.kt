@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
                     bottomBar = {
                         if (dimensionesVentana.widthSizeClass == WindowWidthSizeClass.Compact) {
                             NavigationBar {
-                                destinos.forEach { destino ->
+                                Destino.values().forEach { destino ->
                                     val destinoSeleccionado =
                                         destinoActual?.hierarchy?.any { it.route == destino.ruta } == true
                                     NavigationBarItem(
@@ -97,7 +97,7 @@ class MainActivity : ComponentActivity() {
 fun Navegacion(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = destinos.first().ruta
+        startDestination = Destino.values().first().ruta
     ) {
         composable("dado") { Dado() }
         composable("moneda") { Moneda() }
@@ -112,7 +112,7 @@ fun PantallaExpandida(navController: NavHostController, destinoActual: NavDestin
         PermanentDrawerSheet(modifier = Modifier.padding(horizontal = 12.dp)) {
             Spacer(modifier = Modifier.height(8.dp))
 
-            destinos.forEach { destino ->
+            Destino.values().forEach { destino ->
                 val seleccionado =
                     destinoActual?.hierarchy?.any { it.route == destino.ruta } == true
                 NavigationDrawerItem(
@@ -152,7 +152,7 @@ fun PantallaMediana(navController: NavHostController, destinoActual: NavDestinat
         NavigationRail(modifier = Modifier.padding(top = 4.dp)) {
             Spacer(Modifier.weight(1f))
 
-            destinos.forEach { destino ->
+            Destino.values().forEach { destino ->
                 val seleccionado =
                     destinoActual?.hierarchy?.any { it.route == destino.ruta } == true
                 NavigationRailItem(

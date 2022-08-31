@@ -17,16 +17,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 
-val monedas = mapOf(
-    1 to R.drawable.cara,
-    2 to R.drawable.cruz
-)
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Moneda() {
     var numeroMonedas: Int by remember { mutableStateOf(value = 1) }
     var valorMonedas: List<Int> by remember { mutableStateOf(listOf(0, 0, 0)) }
+
+    val imagenesMonedas = mapOf(
+        1 to R.drawable.cara,
+        2 to R.drawable.cruz
+    )
+
+    fun tirarMonedas(): List<Int> {
+        return numerosAleatorios(final = 2)
+    }
 
     Column(
         modifier = Modifier
@@ -47,7 +51,7 @@ fun Moneda() {
                 val valorMoneda = valorMonedas[numeroMoneda]
                 Image(
                     painter = painterResource(
-                        id = monedas.getOrDefault(
+                        id = imagenesMonedas.getOrDefault(
                             valorMoneda,
                             R.drawable.moneda
                         )
@@ -89,8 +93,4 @@ fun Moneda() {
             }
         }
     }
-}
-
-fun tirarMonedas(): List<Int> {
-    return numerosAleatorios(final = 2)
 }
