@@ -25,8 +25,9 @@ import kotlin.math.min
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Rango() {
+    val valoresIniciales = listOf<Int?>(null, null, null)
     var numeroValores: Int by remember { mutableStateOf(value = 1) }
-    var valoresRango: List<Int?> by remember { mutableStateOf(listOf(null, null, null)) }
+    var valoresRango: List<Int?> by remember { mutableStateOf(valoresIniciales) }
     var textoInicio by remember { mutableStateOf(TextFieldValue("")) }
     var textoFinal by remember { mutableStateOf(TextFieldValue("")) }
     val rangoDefinido = (textoInicio != TextFieldValue("")) and (textoFinal != TextFieldValue(""))
@@ -82,10 +83,13 @@ fun Rango() {
                 )
             )
 
-            FilledTonalIconButton(onClick = {
-                textoInicio = TextFieldValue("")
-                textoFinal = TextFieldValue("")
-            }) {
+            FilledTonalIconButton(
+                onClick = {
+                    textoInicio = TextFieldValue("")
+                    textoFinal = TextFieldValue("")
+                },
+                enabled = (textoInicio != TextFieldValue("")) or (textoFinal != TextFieldValue(""))
+            ) {
                 Icon(
                     imageVector = Icons.Filled.Clear,
                     contentDescription = stringResource(id = R.string.borrar)
@@ -166,7 +170,10 @@ fun Rango() {
                 }
             }
 
-            FilledTonalIconButton(onClick = { valoresRango = listOf(null, null, null) }) {
+            FilledTonalIconButton(
+                onClick = { valoresRango = valoresIniciales },
+                enabled = valoresRango != valoresIniciales
+            ) {
                 Icon(
                     imageVector = Icons.Filled.ClearAll,
                     contentDescription = stringResource(id = R.string.borrar)

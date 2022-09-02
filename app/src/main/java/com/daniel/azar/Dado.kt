@@ -20,8 +20,9 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Dado() {
+    val valoresIniciales = listOf(0, 0, 0)
     var numeroDados: Int by remember { mutableStateOf(value = 1) }
-    var valorDados: List<Int> by remember { mutableStateOf(listOf(0, 0, 0)) }
+    var valorDados: List<Int> by remember { mutableStateOf(valoresIniciales) }
 
     val imagenesDados = mapOf(
         1 to R.drawable.dado_1,
@@ -89,7 +90,10 @@ fun Dado() {
                 }
             }
 
-            FilledTonalIconButton(onClick = { valorDados = listOf(0, 0, 0) }) {
+            FilledTonalIconButton(
+                onClick = { valorDados = valoresIniciales },
+                enabled = valorDados != valoresIniciales
+            ) {
                 Icon(
                     imageVector = Icons.Filled.ClearAll,
                     contentDescription = stringResource(id = R.string.borrar)

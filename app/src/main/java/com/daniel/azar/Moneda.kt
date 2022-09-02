@@ -20,8 +20,9 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Moneda() {
+    val valoresIniciales = listOf(0, 0, 0)
     var numeroMonedas: Int by remember { mutableStateOf(value = 1) }
-    var valorMonedas: List<Int> by remember { mutableStateOf(listOf(0, 0, 0)) }
+    var valorMonedas: List<Int> by remember { mutableStateOf(valoresIniciales) }
 
     val imagenesMonedas = mapOf(
         1 to R.drawable.cara,
@@ -85,7 +86,10 @@ fun Moneda() {
                 }
             }
 
-            FilledTonalIconButton(onClick = { valorMonedas = listOf(0, 0, 0) }) {
+            FilledTonalIconButton(
+                onClick = { valorMonedas = valoresIniciales },
+                enabled = valorMonedas != valoresIniciales
+            ) {
                 Icon(
                     imageVector = Icons.Filled.ClearAll,
                     contentDescription = stringResource(id = R.string.borrar)
