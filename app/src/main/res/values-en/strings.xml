@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Chance</string>
+
+    <string name="destino_dado">Dice</string>
+    <string name="destino_moneda">Coin</string>
+    <string name="destino_rango">Range</string>
+
+    <string name="tirar_dado">Roll dice</string>
+    <string name="tirar_moneda">Toss coin</string>
+    <string name="tirar_rango">Random number</string>
+
+    <string name="borrar">Clear</string>
+    <string name="desplegar">Open</string>
+</resources>

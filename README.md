@@ -1,7 +1,8 @@
 # Azar
 Una aplicación para tirar dados, monedas y obtener números aleatorios de forma sencilla.
 
-Está escrita en Jetpack Compose con Material Design 3 y colores dinámicos.
+Está escrita en Jetpack Compose con Material Design 3 y color dinámico, adaptada a tamaños grandes
+de pantalla y traducida a inglés e italiano.
 
 ## Capturas
 <div align="center" style="width: 100%; display: flex;">

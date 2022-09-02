@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">A caso</string>
+
+    <string name="destino_dado">Dato</string>
+    <string name="destino_moneda">Moneta</string>
+    <string name="destino_rango">Gamma</string>
+
+    <string name="tirar_dado">Gettare dato</string>
+    <string name="tirar_moneda">Gettare moneta</string>
+    <string name="tirar_rango">Numero casuale</string>
+
+    <string name="borrar">Cancellare</string>
+    <string name="desplegar">Schierare</string>
+</resources>
