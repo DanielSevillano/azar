@@ -31,7 +31,6 @@ fun Rango() {
     var textoInicio by remember { mutableStateOf(TextFieldValue("")) }
     var textoFinal by remember { mutableStateOf(TextFieldValue("")) }
     val rangoDefinido = (textoInicio != TextFieldValue("")) and (textoFinal != TextFieldValue(""))
-    var desplegableExpandido by remember { mutableStateOf(false) }
 
     fun tirarRango(valorInicial: Int, valorFinal: Int): List<Int> {
         val inicio = min(valorInicial, valorFinal)
@@ -52,7 +51,7 @@ fun Rango() {
                 onValueChange = { textoInicio = it },
                 modifier = Modifier.weight(1F),
                 placeholder = {
-                    Text(text = "Inicio")
+                    Text(text = stringResource(id = R.string.rango_inicio))
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 singleLine = true,
@@ -71,7 +70,7 @@ fun Rango() {
                 onValueChange = { textoFinal = it },
                 modifier = Modifier.weight(1F),
                 placeholder = {
-                    Text(text = "Final")
+                    Text(text = stringResource(id = R.string.rango_final))
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 singleLine = true,
@@ -97,6 +96,8 @@ fun Rango() {
             }
 
             Column {
+                var desplegableExpandido by remember { mutableStateOf(false) }
+
                 FilledIconButton(onClick = { desplegableExpandido = true }) {
                     Icon(
                         imageVector = Icons.Filled.ArrowDropDown,

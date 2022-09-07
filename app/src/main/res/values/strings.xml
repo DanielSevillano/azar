@@ -12,4 +12,7 @@
 
     <string name="borrar">Borrar</string>
     <string name="desplegar">Desplegar</string>
+
+    <string name="rango_inicio">Desde</string>
+    <string name="rango_final">Hasta</string>
 </resources>

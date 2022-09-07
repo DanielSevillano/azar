@@ -12,4 +12,7 @@
 
     <string name="borrar">Clear</string>
     <string name="desplegar">Open</string>
+
+    <string name="rango_inicio">From</string>
+    <string name="rango_final">To</string>
 </resources>
