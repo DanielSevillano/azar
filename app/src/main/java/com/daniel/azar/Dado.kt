@@ -1,5 +1,6 @@
 package com.daniel.azar
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -12,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -21,8 +23,12 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun Dado() {
     val valoresIniciales = listOf(0, 0, 0)
+
     var numeroDados: Int by remember { mutableStateOf(value = 1) }
     var valorDados: List<Int> by remember { mutableStateOf(valoresIniciales) }
+
+    var gradosRotacion by remember { mutableStateOf(0f) }
+    val rotacion by animateFloatAsState(targetValue = gradosRotacion)
 
     val imagenesDados = mapOf(
         1 to R.drawable.dado_1,
@@ -34,6 +40,7 @@ fun Dado() {
     )
 
     fun tirarDados(): List<Int> {
+        gradosRotacion += 360f
         return numerosAleatorios(final = 6)
     }
 
@@ -64,7 +71,8 @@ fun Dado() {
                     contentDescription = "$valorDado",
                     modifier = Modifier
                         .weight(1f, fill = false)
-                        .widthIn(max = 200.dp),
+                        .widthIn(max = 200.dp)
+                        .rotate(rotacion),
                     alignment = Alignment.Center,
                     contentScale = ContentScale.Fit
                 )

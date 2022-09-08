@@ -1,8 +1,10 @@
 package com.daniel.azar
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
@@ -14,7 +16,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
@@ -26,13 +30,19 @@ import kotlin.math.min
 @Composable
 fun Rango() {
     val valoresIniciales = listOf<Int?>(null, null, null)
+
     var numeroValores: Int by remember { mutableStateOf(value = 1) }
     var valoresRango: List<Int?> by remember { mutableStateOf(valoresIniciales) }
+
     var textoInicio by remember { mutableStateOf(TextFieldValue("")) }
     var textoFinal by remember { mutableStateOf(TextFieldValue("")) }
     val rangoDefinido = (textoInicio != TextFieldValue("")) and (textoFinal != TextFieldValue(""))
 
+    var gradosRotacion by remember { mutableStateOf(0f) }
+    val rotacion by animateFloatAsState(targetValue = gradosRotacion)
+
     fun tirarRango(valorInicial: Int, valorFinal: Int): List<Int> {
+        gradosRotacion += 360f
         val inicio = min(valorInicial, valorFinal)
         val final = max(valorInicial, valorFinal)
         return numerosAleatorios(inicio, final)
@@ -46,20 +56,19 @@ fun Rango() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            val focusManager = LocalFocusManager.current
+
             TextField(
                 value = textoInicio,
                 onValueChange = { textoInicio = it },
                 modifier = Modifier.weight(1F),
-                placeholder = {
-                    Text(text = stringResource(id = R.string.rango_inicio))
-                },
+                placeholder = { Text(text = stringResource(id = R.string.rango_inicio)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
                 singleLine = true,
                 shape = RoundedCornerShape(percent = 50),
                 colors = TextFieldDefaults.textFieldColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(
-                        2.dp
-                    ),
+                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp),
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent
                 )
@@ -69,10 +78,9 @@ fun Rango() {
                 value = textoFinal,
                 onValueChange = { textoFinal = it },
                 modifier = Modifier.weight(1F),
-                placeholder = {
-                    Text(text = stringResource(id = R.string.rango_final))
-                },
+                placeholder = { Text(text = stringResource(id = R.string.rango_final)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
                 singleLine = true,
                 shape = RoundedCornerShape(percent = 50),
                 colors = TextFieldDefaults.textFieldColors(
@@ -140,6 +148,7 @@ fun Rango() {
                 val valorRango = valoresRango[numeroValor]
                 Text(
                     text = if (valorRango == null) "" else "$valorRango",
+                    modifier = Modifier.rotate(rotacion),
                     style = MaterialTheme.typography.displayLarge
                 )
             }
