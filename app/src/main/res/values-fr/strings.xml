@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Hasard</string>
+
+    <string name="destino_dado">Dé</string>
+    <string name="destino_moneda">Pièce</string>
+    <string name="destino_rango">Rang</string>
+
+    <string name="tirar_dado">Lancer un dé</string>
+    <string name="tirar_moneda">Jouer à pile ou face</string>
+    <string name="tirar_rango">Nombre aléatoire</string>
+
+    <string name="borrar">Effacer</string>
+    <string name="desplegar">Déployer</string>
+
+    <string name="rango_inicio">De</string>
+    <string name="rango_final">À</string>
+</resources>
