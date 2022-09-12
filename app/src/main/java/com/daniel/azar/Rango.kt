@@ -21,7 +21,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import kotlin.math.max
 import kotlin.math.min
@@ -34,9 +33,10 @@ fun Rango() {
     var numeroValores: Int by remember { mutableStateOf(value = 1) }
     var valoresRango: List<Int?> by remember { mutableStateOf(valoresIniciales) }
 
-    var textoInicio by remember { mutableStateOf(TextFieldValue("")) }
-    var textoFinal by remember { mutableStateOf(TextFieldValue("")) }
-    val rangoDefinido = (textoInicio != TextFieldValue("")) and (textoFinal != TextFieldValue(""))
+    var textoInicio by remember { mutableStateOf("") }
+    var textoFinal by remember { mutableStateOf("") }
+    val rangoDefinido =
+        remember(textoInicio, textoFinal) { textoInicio.isNotBlank() and textoFinal.isNotBlank() }
 
     var gradosRotacion by remember { mutableStateOf(0f) }
     val rotacion by animateFloatAsState(targetValue = gradosRotacion)
@@ -60,7 +60,9 @@ fun Rango() {
 
             TextField(
                 value = textoInicio,
-                onValueChange = { textoInicio = it },
+                onValueChange = {
+                    if ((it.toIntOrNull() != null) or it.isBlank()) textoInicio = it
+                },
                 modifier = Modifier.weight(1F),
                 placeholder = { Text(text = stringResource(id = R.string.rango_inicio)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -76,7 +78,7 @@ fun Rango() {
 
             TextField(
                 value = textoFinal,
-                onValueChange = { textoFinal = it },
+                onValueChange = { if ((it.toIntOrNull() != null) or it.isBlank()) textoFinal = it },
                 modifier = Modifier.weight(1F),
                 placeholder = { Text(text = stringResource(id = R.string.rango_final)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -92,10 +94,10 @@ fun Rango() {
 
             FilledTonalIconButton(
                 onClick = {
-                    textoInicio = TextFieldValue("")
-                    textoFinal = TextFieldValue("")
+                    textoInicio = ""
+                    textoFinal = ""
                 },
-                enabled = (textoInicio != TextFieldValue("")) or (textoFinal != TextFieldValue(""))
+                enabled = textoInicio.isNotBlank() or textoFinal.isNotBlank()
             ) {
                 Icon(
                     imageVector = Icons.Filled.Clear,
@@ -117,13 +119,13 @@ fun Rango() {
                     expanded = desplegableExpandido,
                     onDismissRequest = { desplegableExpandido = false }) {
                     DropdownMenuItem(text = { Text(text = "1 — 10") }, onClick = {
-                        textoInicio = TextFieldValue("1")
-                        textoFinal = TextFieldValue("10")
+                        textoInicio = "1"
+                        textoFinal = "10"
                         desplegableExpandido = false
                     })
                     DropdownMenuItem(text = { Text(text = "1 — 100") }, onClick = {
-                        textoInicio = TextFieldValue("1")
-                        textoFinal = TextFieldValue("100")
+                        textoInicio = "1"
+                        textoFinal = "100"
                         desplegableExpandido = false
                     })
                 }
@@ -136,8 +138,8 @@ fun Rango() {
                 .clip(RoundedCornerShape(20.dp))
                 .clickable {
                     if (rangoDefinido) {
-                        val valorInicial = textoInicio.text.toInt()
-                        val valorFinal = textoFinal.text.toInt()
+                        val valorInicial = textoInicio.toInt()
+                        val valorFinal = textoFinal.toInt()
                         valoresRango = tirarRango(valorInicial, valorFinal)
                     }
                 }
@@ -157,8 +159,8 @@ fun Rango() {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             FilledIconButton(
                 onClick = {
-                    val valorInicial = textoInicio.text.toInt()
-                    val valorFinal = textoFinal.text.toInt()
+                    val valorInicial = textoInicio.toInt()
+                    val valorFinal = textoFinal.toInt()
                     valoresRango = tirarRango(valorInicial, valorFinal)
                 },
                 enabled = rangoDefinido
