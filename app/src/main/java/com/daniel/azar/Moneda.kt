@@ -13,7 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -68,7 +68,7 @@ fun Moneda() {
                     modifier = Modifier
                         .weight(1f, fill = false)
                         .widthIn(max = 200.dp)
-                        .rotate(rotacion),
+                        .graphicsLayer { rotationX = rotacion },
                     alignment = Alignment.Center,
                     contentScale = ContentScale.Fit
                 )

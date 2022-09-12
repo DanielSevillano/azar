@@ -1,6 +1,5 @@
 package com.daniel.azar
 
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,7 +15,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
@@ -38,11 +36,7 @@ fun Rango() {
     val rangoDefinido =
         remember(textoInicio, textoFinal) { textoInicio.isNotBlank() and textoFinal.isNotBlank() }
 
-    var gradosRotacion by remember { mutableStateOf(0f) }
-    val rotacion by animateFloatAsState(targetValue = gradosRotacion)
-
     fun tirarRango(valorInicial: Int, valorFinal: Int): List<Int> {
-        gradosRotacion += 360f
         val inicio = min(valorInicial, valorFinal)
         val final = max(valorInicial, valorFinal)
         return numerosAleatorios(inicio, final)
@@ -150,7 +144,6 @@ fun Rango() {
                 val valorRango = valoresRango[numeroValor]
                 Text(
                     text = if (valorRango == null) "" else "$valorRango",
-                    modifier = Modifier.rotate(rotacion),
                     style = MaterialTheme.typography.displayLarge
                 )
             }
