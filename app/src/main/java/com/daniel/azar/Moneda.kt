@@ -36,7 +36,7 @@ fun Moneda() {
     )
 
     fun tirarMonedas(): List<Int> {
-        gradosRotacion += 360f
+        gradosRotacion -= 360f
         return numerosAleatorios(final = 2)
     }
 
