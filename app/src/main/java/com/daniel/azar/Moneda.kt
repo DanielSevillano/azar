@@ -9,7 +9,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ClearAll
 import androidx.compose.material.icons.filled.MonetizationOn
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -18,27 +19,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Moneda() {
-    val valoresIniciales = listOf(0, 0, 0)
-
-    var numeroMonedas: Int by remember { mutableStateOf(value = 1) }
-    var valorMonedas: List<Int> by remember { mutableStateOf(valoresIniciales) }
-
-    var gradosRotacion by remember { mutableStateOf(0f) }
-    val rotacion by animateFloatAsState(targetValue = gradosRotacion)
-
-    val imagenesMonedas = mapOf(
-        1 to R.drawable.cara,
-        2 to R.drawable.cruz
-    )
-
-    fun tirarMonedas(): List<Int> {
-        gradosRotacion -= 360f
-        return numerosAleatorios(final = 2)
-    }
+fun Moneda(viewModel: AzarViewModel = viewModel()) {
+    val rotacion by animateFloatAsState(targetValue = viewModel.gradosRotacion)
 
     Column(
         modifier = Modifier
@@ -52,17 +38,14 @@ fun Moneda() {
         Row(modifier = Modifier
             .weight(1f, fill = false)
             .clip(RoundedCornerShape(20.dp))
-            .clickable { valorMonedas = tirarMonedas() }
+            .clickable { viewModel.tirarMonedas() }
             .padding(16.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            for (numeroMoneda in 0 until numeroMonedas) {
-                val valorMoneda = valorMonedas[numeroMoneda]
+            for (numeroMoneda in 0 until viewModel.numeroMonedas) {
+                val valorMoneda = viewModel.valoresMonedas[numeroMoneda]
                 Image(
                     painter = painterResource(
-                        id = imagenesMonedas.getOrDefault(
-                            valorMoneda,
-                            R.drawable.moneda
-                        )
+                        id = viewModel.imagenMoneda(valorMoneda)
                     ),
                     contentDescription = "$valorMoneda",
                     modifier = Modifier
@@ -76,7 +59,7 @@ fun Moneda() {
         }
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            FilledIconButton(onClick = { valorMonedas = tirarMonedas() }) {
+            FilledIconButton(onClick = { viewModel.tirarMonedas() }) {
                 Icon(
                     imageVector = Icons.Filled.MonetizationOn,
                     contentDescription = stringResource(id = R.string.tirar_moneda)
@@ -86,8 +69,8 @@ fun Moneda() {
             Row {
                 for (monedas in 1..3) {
                     FilterChip(
-                        selected = numeroMonedas == monedas,
-                        onClick = { numeroMonedas = monedas },
+                        selected = viewModel.numeroMonedas == monedas,
+                        onClick = { viewModel.numeroMonedas = monedas },
                         label = {
                             Text(text = "$monedas")
                         })
@@ -95,8 +78,8 @@ fun Moneda() {
             }
 
             FilledTonalIconButton(
-                onClick = { valorMonedas = valoresIniciales },
-                enabled = valorMonedas != valoresIniciales
+                onClick = { viewModel.reiniciarMonedas() },
+                enabled = viewModel.valoresMonedasModificados()
             ) {
                 Icon(
                     imageVector = Icons.Filled.ClearAll,

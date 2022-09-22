@@ -11,7 +11,7 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.ClearAll
 import androidx.compose.material.icons.filled.Pin
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -20,28 +20,11 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import kotlin.math.max
-import kotlin.math.min
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Rango() {
-    val valoresIniciales = listOf<Int?>(null, null, null)
-
-    var numeroValores: Int by remember { mutableStateOf(value = 1) }
-    var valoresRango: List<Int?> by remember { mutableStateOf(valoresIniciales) }
-
-    var textoInicio by remember { mutableStateOf("") }
-    var textoFinal by remember { mutableStateOf("") }
-    val rangoDefinido =
-        remember(textoInicio, textoFinal) { textoInicio.isNotBlank() and textoFinal.isNotBlank() }
-
-    fun tirarRango(valorInicial: Int, valorFinal: Int): List<Int> {
-        val inicio = min(valorInicial, valorFinal)
-        val final = max(valorInicial, valorFinal)
-        return numerosAleatorios(inicio, final)
-    }
-
+fun Rango(viewModel: AzarViewModel = viewModel()) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -53,10 +36,8 @@ fun Rango() {
             val focusManager = LocalFocusManager.current
 
             TextField(
-                value = textoInicio,
-                onValueChange = {
-                    if ((it.toIntOrNull() != null) or it.isBlank()) textoInicio = it
-                },
+                value = viewModel.textoInicio,
+                onValueChange = { viewModel.textoInicio = it },
                 modifier = Modifier.weight(1F),
                 placeholder = { Text(text = stringResource(id = R.string.rango_inicio)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -71,8 +52,8 @@ fun Rango() {
             )
 
             TextField(
-                value = textoFinal,
-                onValueChange = { if ((it.toIntOrNull() != null) or it.isBlank()) textoFinal = it },
+                value = viewModel.textoFinal,
+                onValueChange = { viewModel.textoFinal = it },
                 modifier = Modifier.weight(1F),
                 placeholder = { Text(text = stringResource(id = R.string.rango_final)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -87,11 +68,7 @@ fun Rango() {
             )
 
             FilledTonalIconButton(
-                onClick = {
-                    textoInicio = ""
-                    textoFinal = ""
-                },
-                enabled = textoInicio.isNotBlank() or textoFinal.isNotBlank()
+                onClick = { viewModel.reiniciarTextos() }, enabled = viewModel.rangoDefinido()
             ) {
                 Icon(
                     imageVector = Icons.Filled.Clear,
@@ -100,48 +77,35 @@ fun Rango() {
             }
 
             Column {
-                var desplegableExpandido by remember { mutableStateOf(false) }
-
-                FilledIconButton(onClick = { desplegableExpandido = true }) {
+                FilledIconButton(onClick = { viewModel.desplegableExpandido = true }) {
                     Icon(
                         imageVector = Icons.Filled.ArrowDropDown,
                         contentDescription = stringResource(id = R.string.desplegar)
                     )
                 }
 
-                DropdownMenu(
-                    expanded = desplegableExpandido,
-                    onDismissRequest = { desplegableExpandido = false }) {
-                    DropdownMenuItem(text = { Text(text = "1 — 10") }, onClick = {
-                        textoInicio = "1"
-                        textoFinal = "10"
-                        desplegableExpandido = false
-                    })
-                    DropdownMenuItem(text = { Text(text = "1 — 100") }, onClick = {
-                        textoInicio = "1"
-                        textoFinal = "100"
-                        desplegableExpandido = false
-                    })
+                DropdownMenu(expanded = viewModel.desplegableExpandido,
+                    onDismissRequest = { viewModel.desplegableExpandido = false }) {
+                    for (pareja in viewModel.opcionesDesplegable) {
+                        DropdownMenuItem(text = { Text(text = "${pareja.first()} — ${pareja.last()}") },
+                            onClick = {
+                                viewModel.textoInicio = pareja.first().toString()
+                                viewModel.textoFinal = pareja.last().toString()
+                                viewModel.desplegableExpandido = false
+                            })
+                    }
                 }
             }
 
         }
 
-        Row(
-            modifier = Modifier
-                .clip(RoundedCornerShape(20.dp))
-                .clickable {
-                    if (rangoDefinido) {
-                        val valorInicial = textoInicio.toInt()
-                        val valorFinal = textoFinal.toInt()
-                        valoresRango = tirarRango(valorInicial, valorFinal)
-                    }
-                }
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(32.dp)
-        ) {
-            for (numeroValor in 0 until numeroValores) {
-                val valorRango = valoresRango[numeroValor]
+        Row(modifier = Modifier
+            .clip(RoundedCornerShape(20.dp))
+            .clickable { viewModel.tirarRangos() }
+            .padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(32.dp)) {
+            for (numeroValor in 0 until viewModel.numeroRangos) {
+                val valorRango = viewModel.valoresRangos[numeroValor]
                 Text(
                     text = if (valorRango == null) "" else "$valorRango",
                     style = MaterialTheme.typography.displayLarge
@@ -151,12 +115,7 @@ fun Rango() {
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             FilledIconButton(
-                onClick = {
-                    val valorInicial = textoInicio.toInt()
-                    val valorFinal = textoFinal.toInt()
-                    valoresRango = tirarRango(valorInicial, valorFinal)
-                },
-                enabled = rangoDefinido
+                onClick = { viewModel.tirarRangos() }, enabled = viewModel.rangoDefinido()
             ) {
                 Icon(
                     imageVector = Icons.Filled.Pin,
@@ -166,9 +125,8 @@ fun Rango() {
 
             Row {
                 for (numero in 1..3) {
-                    FilterChip(
-                        selected = numeroValores == numero,
-                        onClick = { numeroValores = numero },
+                    FilterChip(selected = viewModel.numeroRangos == numero,
+                        onClick = { viewModel.numeroRangos = numero },
                         label = {
                             Text(text = "$numero")
                         })
@@ -176,8 +134,8 @@ fun Rango() {
             }
 
             FilledTonalIconButton(
-                onClick = { valoresRango = valoresIniciales },
-                enabled = valoresRango != valoresIniciales
+                onClick = { viewModel.reiniciarRangos() },
+                enabled = viewModel.valoresRangosModificados()
             ) {
                 Icon(
                     imageVector = Icons.Filled.ClearAll,

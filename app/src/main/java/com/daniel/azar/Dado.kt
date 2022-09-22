@@ -9,7 +9,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Casino
 import androidx.compose.material.icons.filled.ClearAll
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -18,31 +19,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Dado() {
-    val valoresIniciales = listOf(0, 0, 0)
-
-    var numeroDados: Int by remember { mutableStateOf(value = 1) }
-    var valorDados: List<Int> by remember { mutableStateOf(valoresIniciales) }
-
-    var gradosRotacion by remember { mutableStateOf(0f) }
-    val rotacion by animateFloatAsState(targetValue = gradosRotacion)
-
-    val imagenesDados = mapOf(
-        1 to R.drawable.dado_1,
-        2 to R.drawable.dado_2,
-        3 to R.drawable.dado_3,
-        4 to R.drawable.dado_4,
-        5 to R.drawable.dado_5,
-        6 to R.drawable.dado_6
-    )
-
-    fun tirarDados(): List<Int> {
-        gradosRotacion += 360f
-        return numerosAleatorios(final = 6)
-    }
+fun Dado(viewModel: AzarViewModel = viewModel()) {
+    val rotacion by animateFloatAsState(targetValue = viewModel.gradosRotacion)
 
     Column(
         modifier = Modifier
@@ -56,18 +38,13 @@ fun Dado() {
         Row(modifier = Modifier
             .weight(1f, fill = false)
             .clip(RoundedCornerShape(20.dp))
-            .clickable { valorDados = tirarDados() }
+            .clickable { viewModel.tirarDados() }
             .padding(16.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            for (numeroDado in 0 until numeroDados) {
-                val valorDado = valorDados[numeroDado]
+            for (numeroDado in 0 until viewModel.numeroDados) {
+                val valorDado = viewModel.valoresDados[numeroDado]
                 Image(
-                    painter = painterResource(
-                        id = imagenesDados.getOrDefault(
-                            valorDado,
-                            R.drawable.dado_0
-                        )
-                    ),
+                    painter = painterResource(id = viewModel.imagenDado(valorDado)),
                     contentDescription = "$valorDado",
                     modifier = Modifier
                         .weight(1f, fill = false)
@@ -79,8 +56,10 @@ fun Dado() {
             }
         }
 
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            FilledIconButton(onClick = { valorDados = tirarDados() }) {
+        Row(
+            modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            FilledIconButton(onClick = { viewModel.tirarDados() }) {
                 Icon(
                     imageVector = Icons.Filled.Casino,
                     contentDescription = stringResource(id = R.string.tirar_dado)
@@ -89,9 +68,8 @@ fun Dado() {
 
             Row {
                 for (dados in 1..3) {
-                    FilterChip(
-                        selected = numeroDados == dados,
-                        onClick = { numeroDados = dados },
+                    FilterChip(selected = viewModel.numeroDados == dados,
+                        onClick = { viewModel.numeroDados = dados },
                         label = {
                             Text(text = "$dados")
                         })
@@ -99,8 +77,8 @@ fun Dado() {
             }
 
             FilledTonalIconButton(
-                onClick = { valorDados = valoresIniciales },
-                enabled = valorDados != valoresIniciales
+                onClick = { viewModel.reiniciarDados() },
+                enabled = viewModel.valoresDadosModificados()
             ) {
                 Icon(
                     imageVector = Icons.Filled.ClearAll,
