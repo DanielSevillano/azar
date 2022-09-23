@@ -23,7 +23,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Moneda(viewModel: AzarViewModel = viewModel()) {
+fun Moneda(viewModel: MonedaViewModel = viewModel()) {
     val rotacion by animateFloatAsState(targetValue = viewModel.gradosRotacion)
 
     Column(
@@ -68,8 +68,7 @@ fun Moneda(viewModel: AzarViewModel = viewModel()) {
 
             Row {
                 for (monedas in 1..3) {
-                    FilterChip(
-                        selected = viewModel.numeroMonedas == monedas,
+                    FilterChip(selected = viewModel.numeroMonedas == monedas,
                         onClick = { viewModel.numeroMonedas = monedas },
                         label = {
                             Text(text = "$monedas")

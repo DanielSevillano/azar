@@ -24,7 +24,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Rango(viewModel: AzarViewModel = viewModel()) {
+fun Rango(viewModel: RangoViewModel = viewModel()) {
     Column(
         modifier = Modifier
             .fillMaxSize()

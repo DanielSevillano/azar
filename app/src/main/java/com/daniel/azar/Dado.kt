@@ -23,7 +23,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Dado(viewModel: AzarViewModel = viewModel()) {
+fun Dado(viewModel: DadoViewModel = viewModel()) {
     val rotacion by animateFloatAsState(targetValue = viewModel.gradosRotacion)
 
     Column(
