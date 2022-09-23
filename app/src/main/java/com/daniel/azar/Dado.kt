@@ -4,6 +4,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Casino
@@ -68,11 +69,18 @@ fun Dado(viewModel: DadoViewModel = viewModel()) {
 
             Row {
                 for (dados in 1..3) {
-                    FilterChip(selected = viewModel.numeroDados == dados,
+                    FilterChip(
+                        selected = viewModel.numeroDados == dados,
                         onClick = { viewModel.numeroDados = dados },
                         label = {
                             Text(text = "$dados")
-                        })
+                        },
+                        shape = when (dados) {
+                            1 -> RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp)
+                            3 -> RoundedCornerShape(topEnd = 8.dp, bottomEnd = 8.dp)
+                            else -> CutCornerShape(0.dp)
+                        }
+                    )
                 }
             }
 
