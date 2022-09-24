@@ -50,9 +50,13 @@ fun Rango(viewModel: RangoViewModel = viewModel()) {
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Icon(
-                                imageVector = Icons.Filled.History, contentDescription = "Historial"
+                                imageVector = Icons.Filled.History,
+                                contentDescription = stringResource(id = R.string.historial)
                             )
-                            Text(text = "Historial", style = MaterialTheme.typography.titleLarge)
+                            Text(
+                                text = stringResource(id = R.string.historial),
+                                style = MaterialTheme.typography.titleLarge
+                            )
                         }
                     }
 
@@ -206,7 +210,8 @@ fun Rango(viewModel: RangoViewModel = viewModel()) {
                         }
                     }) {
                         Icon(
-                            imageVector = Icons.Filled.History, contentDescription = "Historial"
+                            imageVector = Icons.Filled.History,
+                            contentDescription = stringResource(id = R.string.historial)
                         )
                     }
 
