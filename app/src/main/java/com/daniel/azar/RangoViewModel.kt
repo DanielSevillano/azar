@@ -23,6 +23,9 @@ class RangoViewModel : AzarViewModel() {
         listOf(1, 10), listOf(1, 100)
     )
 
+    // Historial de tiradas
+    var tiradasRango by mutableStateOf(emptyList<Tirada>())
+
     fun reiniciarRangos() {
         valoresRangos = valoresIniciales
     }
@@ -47,6 +50,7 @@ class RangoViewModel : AzarViewModel() {
             val inicio = min(valorInicial, valorFinal)
             val final = max(valorInicial, valorFinal)
             valoresRangos = numerosAleatorios(inicio, final)
+            tiradasRango = tiradasRango + Tirada(numeroRangos, valoresRangos)
         } catch (_: Exception) {
         }
     }

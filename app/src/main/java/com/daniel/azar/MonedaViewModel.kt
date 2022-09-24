@@ -14,6 +14,9 @@ class MonedaViewModel : AzarViewModel() {
     // Rotación del dado y la moneda
     var gradosRotacion by mutableStateOf(0F)
 
+    // Historial de tiradas
+    var tiradasMoneda by mutableStateOf(emptyList<Tirada>())
+
     fun imagenMoneda(n: Int?): Int {
         return when (n) {
             1 -> R.drawable.cara
@@ -33,5 +36,6 @@ class MonedaViewModel : AzarViewModel() {
     fun tirarMonedas() {
         gradosRotacion -= 360f
         valoresMonedas = numerosAleatorios(final = 2)
+        tiradasMoneda = tiradasMoneda + Tirada(numeroMonedas, valoresMonedas)
     }
 }
