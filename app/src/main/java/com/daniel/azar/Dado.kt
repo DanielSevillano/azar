@@ -4,8 +4,6 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
@@ -27,7 +25,6 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
@@ -42,55 +39,11 @@ fun Dado(viewModel: DadoViewModel = viewModel()) {
 
     ModalBottomSheetLayout(
         sheetContent = {
-            Surface(modifier = Modifier.fillMaxWidth()) {
-                LazyColumn(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentPadding = PaddingValues(20.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    item {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Filled.History,
-                                contentDescription = stringResource(id = R.string.historial)
-                            )
-                            Text(
-                                text = stringResource(id = R.string.historial),
-                                style = MaterialTheme.typography.titleLarge
-                            )
-                        }
-                    }
-
-                    if (viewModel.tiradasDado.isEmpty()) {
-                        item {
-                            Text(
-                                text = "No hay historial",
-                                modifier = Modifier.fillMaxWidth(),
-                                textAlign = TextAlign.Center
-                            )
-                        }
-                    }
-
-                    items(viewModel.tiradasDado.reversed()) { tirada ->
-                        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                            for (n in 0 until tirada.numeroElementos) {
-                                val valorDado = tirada.valoresObtenidos[n]
-                                Image(
-                                    painter = painterResource(id = viewModel.imagenDado(valorDado)),
-                                    contentDescription = "$valorDado",
-                                    modifier = Modifier.widthIn(max = 60.dp),
-                                    alignment = Alignment.Center,
-                                    contentScale = ContentScale.Fit
-                                )
-                            }
-                        }
-                    }
+            Historial(destino = Destino.Dado, tiradas = viewModel.tiradasDado, cerrarHistorial = {
+                coroutineScope.launch {
+                    bottomSheetState.hide()
                 }
-            }
-
+            }, imagenValor = { n -> viewModel.imagenDado(n) })
         },
         sheetState = bottomSheetState,
         sheetShape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)

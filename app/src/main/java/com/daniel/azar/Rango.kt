@@ -2,8 +2,6 @@ package com.daniel.azar
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -24,7 +22,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
@@ -38,49 +35,11 @@ fun Rango(viewModel: RangoViewModel = viewModel()) {
 
     ModalBottomSheetLayout(
         sheetContent = {
-            Surface(modifier = Modifier.fillMaxWidth()) {
-                LazyColumn(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentPadding = PaddingValues(20.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    item {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Filled.History,
-                                contentDescription = stringResource(id = R.string.historial)
-                            )
-                            Text(
-                                text = stringResource(id = R.string.historial),
-                                style = MaterialTheme.typography.titleLarge
-                            )
-                        }
-                    }
-
-                    if (viewModel.tiradasRango.isEmpty()) {
-                        item {
-                            Text(
-                                text = "No hay historial",
-                                modifier = Modifier.fillMaxWidth(),
-                                textAlign = TextAlign.Center
-                            )
-                        }
-                    }
-
-                    items(viewModel.tiradasRango.reversed()) { tirada ->
-                        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                            for (n in 0 until tirada.numeroElementos) {
-                                val valorRango = tirada.valoresObtenidos[n]
-                                Text(text = "$valorRango")
-                            }
-                        }
-                    }
+            Historial(destino = Destino.Rango, tiradas = viewModel.tiradasRango, cerrarHistorial = {
+                coroutineScope.launch {
+                    bottomSheetState.hide()
                 }
-            }
-
+            })
         },
         sheetState = bottomSheetState,
         sheetShape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
