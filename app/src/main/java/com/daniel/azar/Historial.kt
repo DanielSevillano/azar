@@ -55,8 +55,8 @@ fun Historial(
                         IconButton(onClick = { cerrarHistorial() }) {
                             Icon(
                                 imageVector = Icons.Outlined.Close,
-                                contentDescription = "Cerrar"
-                            ) // Traducir
+                                contentDescription = stringResource(id = R.string.cerrar)
+                            )
                         }
                     }
 
