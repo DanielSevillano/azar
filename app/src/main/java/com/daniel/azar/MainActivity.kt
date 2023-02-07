@@ -3,6 +3,7 @@ package com.daniel.azar
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -65,9 +66,52 @@ class MainActivity : ComponentActivity() {
                             navController = navController,
                             startDestination = Destino.values().first().ruta
                         ) {
-                            composable(Destino.Dado.ruta) { Dado() }
-                            composable(Destino.Moneda.ruta) { Moneda() }
-                            composable(Destino.Rango.ruta) { Rango() }
+                            composable(
+                                route = Destino.Dado.ruta,
+                                enterTransition = {
+                                    slideIntoContainer(AnimatedContentScope.SlideDirection.Right)
+                                },
+                                exitTransition = {
+                                    slideOutOfContainer(AnimatedContentScope.SlideDirection.Left)
+                                }
+                            ) {
+                                Dado()
+                            }
+
+                            composable(
+                                route = Destino.Moneda.ruta,
+                                enterTransition = {
+                                    when (initialState.destination.route) {
+                                        Destino.Dado.ruta -> slideIntoContainer(
+                                            AnimatedContentScope.SlideDirection.Left
+                                        )
+                                        else -> slideIntoContainer(AnimatedContentScope.SlideDirection.Right)
+                                    }
+                                },
+                                exitTransition = {
+                                    when (targetState.destination.route) {
+                                        Destino.Dado.ruta -> slideOutOfContainer(
+                                            AnimatedContentScope.SlideDirection.Right
+                                        )
+                                        else -> slideOutOfContainer(AnimatedContentScope.SlideDirection.Left)
+                                    }
+
+                                }
+                            ) {
+                                Moneda()
+                            }
+
+                            composable(
+                                route = Destino.Rango.ruta,
+                                enterTransition = {
+                                    slideIntoContainer(AnimatedContentScope.SlideDirection.Left)
+                                },
+                                exitTransition = {
+                                    slideOutOfContainer(AnimatedContentScope.SlideDirection.Right)
+                                }
+                            ) {
+                                Rango()
+                            }
                         }
                     }
                 }
