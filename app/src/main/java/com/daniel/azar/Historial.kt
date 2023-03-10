@@ -6,7 +6,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.History
-import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,42 +21,28 @@ import androidx.compose.ui.unit.dp
 fun Historial(
     destino: Destino,
     tiradas: List<Tirada>,
-    cerrarHistorial: () -> Unit,
     imagenValor: (Int?) -> Int = { R.drawable.dado_0 }
 ) {
     Surface(modifier = Modifier.fillMaxWidth()) {
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
-            contentPadding = PaddingValues(start = 16.dp, top = 12.dp, end = 16.dp, bottom = 20.dp),
+            contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 20.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             item {
                 Column {
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Filled.History,
-                                contentDescription = stringResource(id = R.string.historial)
-                            )
-                            Text(
-                                text = stringResource(id = R.string.historial),
-                                style = MaterialTheme.typography.titleLarge
-                            )
-                        }
-
-                        IconButton(onClick = { cerrarHistorial() }) {
-                            Icon(
-                                imageVector = Icons.Outlined.Close,
-                                contentDescription = stringResource(id = R.string.cerrar)
-                            )
-                        }
+                        Icon(
+                            imageVector = Icons.Filled.History,
+                            contentDescription = stringResource(id = R.string.historial)
+                        )
+                        Text(
+                            text = stringResource(id = R.string.historial),
+                            style = MaterialTheme.typography.titleLarge
+                        )
                     }
 
                     Divider(
