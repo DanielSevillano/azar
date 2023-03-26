@@ -44,7 +44,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.4"
     }
 
     packagingOptions {
@@ -58,14 +58,14 @@ android {
 }
 
 dependencies {
-    val composeVersion = "1.3.3"
-    val lifecycleVersion = "2.6.0"
-    val accompanistVersion = "0.28.0"
+    val composeVersion = "1.4.0"
+    val lifecycleVersion = "2.6.1"
+    val accompanistVersion = "0.30.0"
 
-    implementation("androidx.activity:activity-compose:1.6.1")
+    implementation("androidx.activity:activity-compose:1.7.0")
     implementation("androidx.compose.ui:ui:$composeVersion")
-    implementation("androidx.compose.material:material-icons-extended:1.3.1")
-    implementation("androidx.compose.material3:material3:1.1.0-alpha08")
+    implementation("androidx.compose.material:material-icons-extended:$composeVersion")
+    implementation("androidx.compose.material3:material3:1.1.0-beta01")
     implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.core:core-splashscreen:1.0.0")
