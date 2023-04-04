@@ -2,19 +2,28 @@
 <resources>
     <string name="app_name">Azar</string>
 
-    <string name="destino_dado">Dado</string>
-    <string name="destino_moneda">Moneda</string>
-    <string name="destino_rango">Rango</string>
+    <string name="elemento_dado">Dado</string>
+    <string name="elemento_moneda">Moneda</string>
+    <string name="elemento_rango">Rango</string>
 
     <string name="tirar_dado">Tirar dado</string>
-    <string name="tirar_moneda">Tirar moneda</string>
+    <string name="tirar_moneda">Lanzar moneda</string>
     <string name="tirar_rango">Número aleatorio</string>
 
-    <string name="rango_inicio">Desde</string>
-    <string name="rango_final">Hasta</string>
+    <string name="rango_inicio">Inicio</string>
+    <string name="rango_final">Final</string>
 
     <string name="historial">Historial</string>
-    <string name="borrar">Borrar</string>
-    <string name="desplegar">Desplegar</string>
+    <string name="historial_eliminar">Eliminar historial</string>
     <string name="cerrar">Cerrar</string>
+    <string name="buenos_dias">¡Buenos días! ☀</string>
+    <string name="rango_confirmar">Confirmar</string>
+    <string name="rango_cancelar">Cancelar</string>
+    <string name="rango_definir">Definir rango</string>
+    <string name="historial_vacio">No hay historial</string>
+    <string name="buenas_noches">¡Buenas noches! 🌙</string>
+    <string name="buenas_tardes">¡Buenas tardes! ☀</string>
+    <string name="numero_uno">Uno</string>
+    <string name="numero_dos">Dos</string>
+    <string name="numero_tres">Tres</string>
 </resources>

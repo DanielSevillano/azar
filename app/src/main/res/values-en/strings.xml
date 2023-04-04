@@ -2,19 +2,27 @@
 <resources>
     <string name="app_name">Chance</string>
 
-    <string name="destino_dado">Dice</string>
-    <string name="destino_moneda">Coin</string>
-    <string name="destino_rango">Range</string>
+    <string name="elemento_dado">Dice</string>
+    <string name="elemento_moneda">Coin</string>
+    <string name="elemento_rango">Range</string>
 
     <string name="tirar_dado">Roll dice</string>
     <string name="tirar_moneda">Toss coin</string>
     <string name="tirar_rango">Random number</string>
 
-    <string name="rango_inicio">From</string>
-    <string name="rango_final">To</string>
-
     <string name="historial">History</string>
-    <string name="borrar">Clear</string>
-    <string name="desplegar">Open</string>
     <string name="cerrar">Close</string>
+    <string name="rango_inicio">Beginning</string>
+    <string name="rango_final">End</string>
+    <string name="historial_eliminar">Delete history</string>
+    <string name="buenos_dias">Good morning! ☀️</string>
+    <string name="rango_definir">Define range</string>
+    <string name="historial_vacio">No history</string>
+    <string name="buenas_noches">Good night! 🌙</string>
+    <string name="buenas_tardes">Good afternoon! ☀</string>
+    <string name="numero_uno">One</string>
+    <string name="numero_dos">Two</string>
+    <string name="numero_tres">Three</string>
+    <string name="rango_cancelar">Cancel</string>
+    <string name="rango_confirmar">Confirm</string>
 </resources>

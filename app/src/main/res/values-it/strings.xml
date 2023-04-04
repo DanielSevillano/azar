@@ -2,19 +2,27 @@
 <resources>
     <string name="app_name">A caso</string>
 
-    <string name="destino_dado">Dato</string>
-    <string name="destino_moneda">Moneta</string>
-    <string name="destino_rango">Gamma</string>
+    <string name="elemento_dado">Dato</string>
+    <string name="elemento_moneda">Moneta</string>
+    <string name="elemento_rango">Gamma</string>
 
     <string name="tirar_dado">Gettare dato</string>
     <string name="tirar_moneda">Gettare moneta</string>
     <string name="tirar_rango">Numero casuale</string>
 
-    <string name="rango_inicio">Da</string>
-    <string name="rango_final">Fino</string>
-
+    <string name="rango_inicio">Inizio</string>
+    <string name="rango_final">Finale</string>
     <string name="historial">Cronologia</string>
-    <string name="borrar">Cancellare</string>
-    <string name="desplegar">Schierare</string>
+    <string name="historial_eliminar">Eliminare cronologia</string>
     <string name="cerrar">Chiudere</string>
+    <string name="numero_uno">Uno</string>
+    <string name="numero_dos">Due</string>
+    <string name="numero_tres">Tre</string>
+    <string name="buenos_dias">Buongiorno! ☀</string>
+    <string name="rango_confirmar">Confirmare</string>
+    <string name="rango_cancelar">Cancelare</string>
+    <string name="rango_definir">Definire la gamma</string>
+    <string name="historial_vacio">Non c\'è cronologia</string>
+    <string name="buenas_noches">Buonasera! 🌙</string>
+    <string name="buenas_tardes">Buon pomeriggio! ☀</string>
 </resources>

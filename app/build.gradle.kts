@@ -8,10 +8,10 @@ android {
 
     defaultConfig {
         applicationId = "com.daniel.azar"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 33
-        versionCode = 5
-        versionName = "1.3"
+        versionCode = 6
+        versionName = "2.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -60,7 +60,6 @@ android {
 dependencies {
     val composeVersion = "1.4.0"
     val lifecycleVersion = "2.6.1"
-    val accompanistVersion = "0.30.0"
 
     implementation("androidx.activity:activity-compose:1.7.0")
     implementation("androidx.compose.ui:ui:$composeVersion")
@@ -71,9 +70,7 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion")
-    implementation("androidx.navigation:navigation-compose:2.5.3")
-    implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
-    implementation("com.google.accompanist:accompanist-navigation-animation:$accompanistVersion")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

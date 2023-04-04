@@ -2,19 +2,27 @@
 <resources>
     <string name="app_name">Hasard</string>
 
-    <string name="destino_dado">Dé</string>
-    <string name="destino_moneda">Pièce</string>
-    <string name="destino_rango">Rang</string>
+    <string name="elemento_dado">Dé</string>
+    <string name="elemento_moneda">Pièce</string>
+    <string name="elemento_rango">Rang</string>
 
     <string name="tirar_dado">Lancer un dé</string>
     <string name="tirar_moneda">Jouer à pile ou face</string>
     <string name="tirar_rango">Nombre aléatoire</string>
 
-    <string name="rango_inicio">De</string>
-    <string name="rango_final">À</string>
-
+    <string name="rango_inicio">Début</string>
+    <string name="rango_final">Fin</string>
     <string name="historial">Historique</string>
-    <string name="borrar">Effacer</string>
-    <string name="desplegar">Déployer</string>
     <string name="cerrar">Fermer</string>
+    <string name="numero_uno">Un</string>
+    <string name="numero_dos">Deux</string>
+    <string name="numero_tres">Trois</string>
+    <string name="buenos_dias">Bonjour! ☀</string>
+    <string name="rango_confirmar">Confirmer</string>
+    <string name="rango_cancelar">Annuler</string>
+    <string name="rango_definir">Définir le rang</string>
+    <string name="historial_vacio">Pas d\'historique</string>
+    <string name="buenas_noches">Bonne nuit! 🌙</string>
+    <string name="buenas_tardes">Bonsoir! ☀</string>
+    <string name="historial_eliminar">Supprimer l\'historique</string>
 </resources>
