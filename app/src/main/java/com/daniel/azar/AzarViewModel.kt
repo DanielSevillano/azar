@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
-class AzarViewModel: ViewModel() {
+class AzarViewModel : ViewModel() {
     var elementoSeleccionado by mutableStateOf(Elemento.Dado)
     var numeroElementos by mutableStateOf(Numero.Uno)
 
@@ -25,7 +25,7 @@ class AzarViewModel: ViewModel() {
     fun tirarElemento() {
         gradosRotacion += 360f
 
-        when(elementoSeleccionado) {
+        when (elementoSeleccionado) {
             Elemento.Dado -> {
                 valoresDado = List(size = numeroElementos.numero) { (1..6).random() }
                 tiradasDado = tiradasDado + Tirada(valoresDado!!)
@@ -35,14 +35,15 @@ class AzarViewModel: ViewModel() {
                 tiradasMoneda = tiradasMoneda + Tirada(valoresMoneda!!)
             }
             Elemento.Rango -> {
-                valoresRango = List(size = numeroElementos.numero) { (inicioRango..finalRango).random() }
+                valoresRango =
+                    List(size = numeroElementos.numero) { (inicioRango..finalRango).random() }
                 tiradasRango = tiradasRango + Tirada(valoresRango!!)
             }
         }
     }
 
     fun valoresElemento(elemento: Elemento): List<Int>? {
-        return when(elemento) {
+        return when (elemento) {
             Elemento.Dado -> valoresDado
             Elemento.Moneda -> valoresMoneda
             Elemento.Rango -> valoresRango
@@ -50,7 +51,7 @@ class AzarViewModel: ViewModel() {
     }
 
     fun tiradasElemento(elemento: Elemento): List<Tirada> {
-        return when(elemento) {
+        return when (elemento) {
             Elemento.Dado -> tiradasDado
             Elemento.Moneda -> tiradasMoneda
             Elemento.Rango -> tiradasRango
@@ -78,7 +79,7 @@ class AzarViewModel: ViewModel() {
     }
 
     fun representarTirada(elemento: Elemento): (Int) -> Int {
-        return when(elemento) {
+        return when (elemento) {
             Elemento.Dado -> { n -> representarDado(n) }
             Elemento.Moneda -> { n -> representarMoneda(n) }
             Elemento.Rango -> { _ -> 0 }
@@ -94,10 +95,18 @@ class AzarViewModel: ViewModel() {
     }
 
     fun eliminarHistorialElemento(elemento: Elemento) {
-        when(elemento) {
+        when (elemento) {
             Elemento.Dado -> tiradasDado = emptyList()
             Elemento.Moneda -> tiradasMoneda = emptyList()
             Elemento.Rango -> tiradasRango = emptyList()
+        }
+    }
+
+    fun borrarValoresElemento() {
+        when (elementoSeleccionado) {
+            Elemento.Dado -> valoresDado = null
+            Elemento.Moneda -> valoresMoneda = null
+            Elemento.Rango -> valoresRango = null
         }
     }
 }

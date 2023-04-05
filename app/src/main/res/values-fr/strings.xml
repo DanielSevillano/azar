@@ -25,4 +25,5 @@
     <string name="buenas_noches">Bonne nuit! 🌙</string>
     <string name="buenas_tardes">Bonsoir! ☀</string>
     <string name="historial_eliminar">Supprimer l\'historique</string>
+    <string name="borrar">Effacer</string>
 </resources>

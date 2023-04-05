@@ -25,4 +25,5 @@
     <string name="historial_vacio">Non c\'è cronologia</string>
     <string name="buenas_noches">Buonasera! 🌙</string>
     <string name="buenas_tardes">Buon pomeriggio! ☀</string>
+    <string name="borrar">Cancellare</string>
 </resources>

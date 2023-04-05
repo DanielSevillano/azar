@@ -25,4 +25,5 @@
     <string name="numero_tres">Three</string>
     <string name="rango_cancelar">Cancel</string>
     <string name="rango_confirmar">Confirm</string>
+    <string name="borrar">Clear</string>
 </resources>

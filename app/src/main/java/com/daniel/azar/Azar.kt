@@ -30,8 +30,11 @@ fun Azar(viewModel: AzarViewModel = viewModel()) {
                 numeroSeleccionado = viewModel.numeroElementos,
                 tirarElemento = { viewModel.tirarElemento() },
                 cambiarNumeroSeleccionado = { numero -> viewModel.numeroElementos = numero },
-                abrirHistorial = { historialAbierto = true }
-            ) { dialogoRangoAbierto = true }
+                abrirHistorial = { historialAbierto = true },
+                abrirDialogoRango = { dialogoRangoAbierto = true },
+                valoresElemento = viewModel.valoresElemento(viewModel.elementoSeleccionado),
+                borrarValores = { viewModel.borrarValoresElemento() }
+            )
         }
     ) { paddingValues ->
         Contenido(

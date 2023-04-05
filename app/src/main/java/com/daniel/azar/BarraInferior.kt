@@ -2,6 +2,7 @@ package com.daniel.azar
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Shuffle
+import androidx.compose.material.icons.outlined.ClearAll
 import androidx.compose.material.icons.outlined.History
 import androidx.compose.material.icons.outlined.SettingsEthernet
 import androidx.compose.material3.*
@@ -15,16 +16,20 @@ fun BarraInferior(
     tirarElemento: () -> Unit,
     cambiarNumeroSeleccionado: (Numero) -> Unit,
     abrirHistorial: () -> Unit,
-    abrirDialogoRango: () -> Unit
+    abrirDialogoRango: () -> Unit,
+    valoresElemento: List<Int>?,
+    borrarValores: () -> Unit
 ) {
     BottomAppBar(
         actions = {
             IconButton(onClick = {
-                cambiarNumeroSeleccionado(when(numeroSeleccionado) {
-                    Numero.Uno -> Numero.Dos
-                    Numero.Dos -> Numero.Tres
-                    Numero.Tres -> Numero.Uno
-                })
+                cambiarNumeroSeleccionado(
+                    when (numeroSeleccionado) {
+                        Numero.Uno -> Numero.Dos
+                        Numero.Dos -> Numero.Tres
+                        Numero.Tres -> Numero.Uno
+                    }
+                )
             }) {
                 Icon(
                     imageVector = numeroSeleccionado.icono,
@@ -39,11 +44,20 @@ fun BarraInferior(
                 )
             }
 
-            if(elementoSeleccionado == Elemento.Rango) {
+            if (elementoSeleccionado == Elemento.Rango) {
                 IconButton(onClick = { abrirDialogoRango() }) {
                     Icon(
                         imageVector = Icons.Outlined.SettingsEthernet,
                         contentDescription = stringResource(id = R.string.rango_definir)
+                    )
+                }
+            }
+
+            if (!valoresElemento.isNullOrEmpty()) {
+                IconButton(onClick = { borrarValores() }) {
+                    Icon(
+                        imageVector = Icons.Outlined.ClearAll,
+                        contentDescription = stringResource(id = R.string.borrar)
                     )
                 }
             }
@@ -56,7 +70,7 @@ fun BarraInferior(
             ) {
                 Icon(
                     imageVector = Icons.Default.Shuffle,
-                    contentDescription = when(elementoSeleccionado) {
+                    contentDescription = when (elementoSeleccionado) {
                         Elemento.Dado -> stringResource(id = R.string.tirar_dado)
                         Elemento.Moneda -> stringResource(id = R.string.tirar_moneda)
                         Elemento.Rango -> stringResource(id = R.string.tirar_rango)
