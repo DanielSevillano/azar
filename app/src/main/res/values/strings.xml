@@ -16,13 +16,10 @@
     <string name="historial">Historial</string>
     <string name="historial_eliminar">Eliminar historial</string>
     <string name="cerrar">Cerrar</string>
-    <string name="buenos_dias">¡Buenos días! ☀</string>
     <string name="rango_confirmar">Confirmar</string>
     <string name="rango_cancelar">Cancelar</string>
     <string name="rango_definir">Definir rango</string>
     <string name="historial_vacio">No hay historial</string>
-    <string name="buenas_noches">¡Buenas noches! 🌙</string>
-    <string name="buenas_tardes">¡Buenas tardes! ☀</string>
     <string name="numero_uno">Uno</string>
     <string name="numero_dos">Dos</string>
     <string name="numero_tres">Tres</string>

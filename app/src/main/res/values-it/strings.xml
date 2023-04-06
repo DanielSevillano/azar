@@ -18,12 +18,9 @@
     <string name="numero_uno">Uno</string>
     <string name="numero_dos">Due</string>
     <string name="numero_tres">Tre</string>
-    <string name="buenos_dias">Buongiorno! ☀</string>
     <string name="rango_confirmar">Confirmare</string>
     <string name="rango_cancelar">Cancelare</string>
     <string name="rango_definir">Definire la gamma</string>
     <string name="historial_vacio">Non c\'è cronologia</string>
-    <string name="buenas_noches">Buonasera! 🌙</string>
-    <string name="buenas_tardes">Buon pomeriggio! ☀</string>
     <string name="borrar">Cancellare</string>
 </resources>

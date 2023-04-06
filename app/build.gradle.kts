@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.daniel.azar"
-        minSdk = 26
+        minSdk = 24
         targetSdk = 33
         versionCode = 6
         versionName = "2.0"

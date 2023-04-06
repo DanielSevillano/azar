@@ -81,7 +81,7 @@ class AzarViewModel : ViewModel() {
         return when (elemento) {
             Elemento.Dado -> { n -> representarDado(n) }
             Elemento.Moneda -> { n -> representarMoneda(n) }
-            Elemento.Rango -> { _ -> 0 }
+            else -> { _ -> 0 }
         }
     }
 

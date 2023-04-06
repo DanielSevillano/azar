@@ -15,11 +15,8 @@
     <string name="rango_inicio">Beginning</string>
     <string name="rango_final">End</string>
     <string name="historial_eliminar">Delete history</string>
-    <string name="buenos_dias">Good morning! ☀️</string>
     <string name="rango_definir">Define range</string>
     <string name="historial_vacio">No history</string>
-    <string name="buenas_noches">Good night! 🌙</string>
-    <string name="buenas_tardes">Good afternoon! ☀</string>
     <string name="numero_uno">One</string>
     <string name="numero_dos">Two</string>
     <string name="numero_tres">Three</string>

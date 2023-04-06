@@ -17,13 +17,10 @@
     <string name="numero_uno">Un</string>
     <string name="numero_dos">Deux</string>
     <string name="numero_tres">Trois</string>
-    <string name="buenos_dias">Bonjour! ☀</string>
     <string name="rango_confirmar">Confirmer</string>
     <string name="rango_cancelar">Annuler</string>
     <string name="rango_definir">Définir le rang</string>
     <string name="historial_vacio">Pas d\'historique</string>
-    <string name="buenas_noches">Bonne nuit! 🌙</string>
-    <string name="buenas_tardes">Bonsoir! ☀</string>
     <string name="historial_eliminar">Supprimer l\'historique</string>
     <string name="borrar">Effacer</string>
 </resources>
