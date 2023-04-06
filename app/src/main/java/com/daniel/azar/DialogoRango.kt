@@ -26,8 +26,7 @@ fun DialogoRango(
     cerrarDialogo: () -> Unit,
     inicioRango: Int,
     finalRango: Int,
-    cambiarInicioRango: (Int) -> Unit,
-    cambiarFinalRango: (Int) -> Unit
+    cambiarRango: (Int, Int) -> Unit,
 ) {
     var textoInicioRango by rememberSaveable { mutableStateOf("$inicioRango") }
     var textoFinalRango by rememberSaveable { mutableStateOf("$finalRango") }
@@ -40,8 +39,7 @@ fun DialogoRango(
                     val numero1 = textoInicioRango.toInt()
                     val numero2 = textoFinalRango.toInt()
 
-                    cambiarInicioRango(min(numero1, numero2))
-                    cambiarFinalRango(max(numero1, numero2))
+                    cambiarRango(min(numero1, numero2), max(numero1, numero2))
                     cerrarDialogo()
                 },
                 enabled = textoInicioRango.isNotBlank() and textoFinalRango.isNotBlank()

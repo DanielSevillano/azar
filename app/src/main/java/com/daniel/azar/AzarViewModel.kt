@@ -6,12 +6,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
 class AzarViewModel : ViewModel() {
-    var elementoSeleccionado by mutableStateOf(Elemento.Dado)
     var numeroElementos by mutableStateOf(Numero.Uno)
 
-    private var valoresDado: List<Int>? by mutableStateOf(null)
-    private var valoresMoneda: List<Int>? by mutableStateOf(null)
-    private var valoresRango: List<Int>? by mutableStateOf(null)
+    var valoresDado: List<Int>? by mutableStateOf(null)
+    var valoresMoneda: List<Int>? by mutableStateOf(null)
+    var valoresRango: List<Int>? by mutableStateOf(null)
 
     private var tiradasDado by mutableStateOf(emptyList<Tirada>())
     private var tiradasMoneda by mutableStateOf(emptyList<Tirada>())
@@ -22,10 +21,10 @@ class AzarViewModel : ViewModel() {
 
     var gradosRotacion by mutableStateOf(0F)
 
-    fun tirarElemento() {
+    fun tirarElemento(elemento: Elemento) {
         gradosRotacion += 360f
 
-        when (elementoSeleccionado) {
+        when (elemento) {
             Elemento.Dado -> {
                 valoresDado = List(size = numeroElementos.numero) { (1..6).random() }
                 tiradasDado = tiradasDado + Tirada(valoresDado!!)
@@ -58,7 +57,7 @@ class AzarViewModel : ViewModel() {
         }
     }
 
-    private fun representarDado(numero: Int): Int {
+    fun representarDado(numero: Int): Int {
         return when (numero) {
             1 -> R.drawable.dado_1
             2 -> R.drawable.dado_2
@@ -70,7 +69,7 @@ class AzarViewModel : ViewModel() {
         }
     }
 
-    private fun representarMoneda(numero: Int): Int {
+    fun representarMoneda(numero: Int): Int {
         return when (numero) {
             1 -> R.drawable.cara
             2 -> R.drawable.cruz
@@ -86,12 +85,9 @@ class AzarViewModel : ViewModel() {
         }
     }
 
-    fun cambiarInicioRango(numero: Int) {
-        inicioRango = numero
-    }
-
-    fun cambiarFinalRango(numero: Int) {
-        finalRango = numero
+    fun cambiarRango(inicio: Int, final: Int) {
+        inicioRango = inicio
+        finalRango = final
     }
 
     fun eliminarHistorialElemento(elemento: Elemento) {
@@ -102,8 +98,8 @@ class AzarViewModel : ViewModel() {
         }
     }
 
-    fun borrarValoresElemento() {
-        when (elementoSeleccionado) {
+    fun borrarValoresElemento(elemento: Elemento) {
+        when (elemento) {
             Elemento.Dado -> valoresDado = null
             Elemento.Moneda -> valoresMoneda = null
             Elemento.Rango -> valoresRango = null

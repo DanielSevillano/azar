@@ -1,58 +1,85 @@
 package com.daniel.azar
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.outlined.*
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
-fun Azar(viewModel: AzarViewModel = viewModel()) {
+fun Azar(
+    pantallaCompacta: Boolean,
+    viewModel: AzarViewModel = viewModel()
+) {
+    val estadoPager = rememberPagerState()
     var historialAbierto by rememberSaveable { mutableStateOf(false) }
     var dialogoRangoAbierto by rememberSaveable { mutableStateOf(false) }
     val estadoHistorial = rememberModalBottomSheetState()
+    val elementoSeleccionado = Elemento.values()[estadoPager.currentPage]
 
     Scaffold(
         topBar = {
             BarraSuperior(
-                elementoSeleccionado = viewModel.elementoSeleccionado,
-                cambiarElementoSeleccionado = { elemento ->
-                    viewModel.elementoSeleccionado = elemento
-                }
+                estadoPager = estadoPager,
+                usarIconos = !pantallaCompacta
             )
         },
         bottomBar = {
             BarraInferior(
-                elementoSeleccionado = viewModel.elementoSeleccionado,
+                elementoSeleccionado = Elemento.values()[estadoPager.currentPage],
                 numeroSeleccionado = viewModel.numeroElementos,
-                tirarElemento = { viewModel.tirarElemento() },
+                tirarElemento = { elemento -> viewModel.tirarElemento(elemento) },
                 cambiarNumeroSeleccionado = { numero -> viewModel.numeroElementos = numero },
                 abrirHistorial = { historialAbierto = true },
-                abrirDialogoRango = { dialogoRangoAbierto = true },
-                valoresElemento = viewModel.valoresElemento(viewModel.elementoSeleccionado),
-                borrarValores = { viewModel.borrarValoresElemento() }
-            )
+                valoresElemento = viewModel.valoresElemento(elementoSeleccionado)
+            ) { elemento -> viewModel.borrarValoresElemento(elemento) }
         }
     ) { paddingValues ->
-        Contenido(
-            valoresEspaciado = paddingValues,
-            elementoSeleccionado = viewModel.elementoSeleccionado,
-            valoresElemento = viewModel.valoresElemento(viewModel.elementoSeleccionado),
-            representarValores = viewModel.representarTirada(viewModel.elementoSeleccionado),
-            gradosRotacion = viewModel.gradosRotacion
-        ) { viewModel.tirarElemento() }
+        HorizontalPager(
+            pageCount = Elemento.values().size,
+            modifier = Modifier.padding(paddingValues),
+            state = estadoPager
+        ) { indice ->
+            when (Elemento.values()[indice]) {
+                Elemento.Dado -> ContenidoDado(
+                    valoresElemento = viewModel.valoresDado,
+                    representarValores = { n -> viewModel.representarDado(n) },
+                    gradosRotacion = viewModel.gradosRotacion,
+                    tirarElemento = { viewModel.tirarElemento(Elemento.Dado) }
+                )
+
+                Elemento.Moneda -> ContenidoMoneda(
+                    valoresElemento = viewModel.valoresMoneda,
+                    representarValores = { n -> viewModel.representarMoneda(n) },
+                    gradosRotacion = viewModel.gradosRotacion,
+                    tirarElemento = { viewModel.tirarElemento(Elemento.Moneda) }
+                )
+
+                Elemento.Rango -> ContenidoRango(
+                    pantallaCompacta = pantallaCompacta,
+                    valoresElemento = viewModel.valoresRango,
+                    gradosRotacion = viewModel.gradosRotacion,
+                    tirarElemento = { viewModel.tirarElemento(Elemento.Rango) },
+                    inicioRango = viewModel.inicioRango,
+                    finalRango = viewModel.finalRango,
+                    abrirDialogoRango = { dialogoRangoAbierto = true }
+                )
+            }
+        }
 
         if (historialAbierto) {
             Historial(
                 cerrarHistorial = { historialAbierto = false },
                 estadoHistorial = estadoHistorial,
-                elementoSeleccionado = viewModel.elementoSeleccionado,
-                tiradasElemento = viewModel.tiradasElemento(viewModel.elementoSeleccionado),
-                representarTirada = viewModel.representarTirada(viewModel.elementoSeleccionado),
-                eliminarHistorial = { viewModel.eliminarHistorialElemento(viewModel.elementoSeleccionado) }
+                elementoSeleccionado = Elemento.values()[estadoPager.currentPage],
+                tiradasElemento = viewModel.tiradasElemento(elementoSeleccionado),
+                representarTirada = viewModel.representarTirada(elementoSeleccionado),
+                eliminarHistorial = { viewModel.eliminarHistorialElemento(elementoSeleccionado) }
             )
         }
 
@@ -61,8 +88,7 @@ fun Azar(viewModel: AzarViewModel = viewModel()) {
                 cerrarDialogo = { dialogoRangoAbierto = false },
                 inicioRango = viewModel.inicioRango,
                 finalRango = viewModel.finalRango,
-                cambiarInicioRango = { n -> viewModel.cambiarInicioRango(n) },
-                cambiarFinalRango = { n -> viewModel.cambiarFinalRango(n) }
+                cambiarRango = { inicio, final -> viewModel.cambiarRango(inicio, final) },
             )
         }
     }

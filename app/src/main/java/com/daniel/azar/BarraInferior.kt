@@ -4,7 +4,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Shuffle
 import androidx.compose.material.icons.outlined.ClearAll
 import androidx.compose.material.icons.outlined.History
-import androidx.compose.material.icons.outlined.SettingsEthernet
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
@@ -13,12 +12,11 @@ import androidx.compose.ui.res.stringResource
 fun BarraInferior(
     elementoSeleccionado: Elemento,
     numeroSeleccionado: Numero,
-    tirarElemento: () -> Unit,
+    tirarElemento: (Elemento) -> Unit,
     cambiarNumeroSeleccionado: (Numero) -> Unit,
     abrirHistorial: () -> Unit,
-    abrirDialogoRango: () -> Unit,
     valoresElemento: List<Int>?,
-    borrarValores: () -> Unit
+    borrarValores: (Elemento) -> Unit
 ) {
     BottomAppBar(
         actions = {
@@ -44,39 +42,44 @@ fun BarraInferior(
                 )
             }
 
-            if (elementoSeleccionado == Elemento.Rango) {
-                IconButton(onClick = { abrirDialogoRango() }) {
-                    Icon(
-                        imageVector = Icons.Outlined.SettingsEthernet,
-                        contentDescription = stringResource(id = R.string.rango_definir)
-                    )
-                }
-            }
-
-            if (!valoresElemento.isNullOrEmpty()) {
-                IconButton(onClick = { borrarValores() }) {
-                    Icon(
-                        imageVector = Icons.Outlined.ClearAll,
-                        contentDescription = stringResource(id = R.string.borrar)
-                    )
-                }
+            IconButton(
+                onClick = { borrarValores(elementoSeleccionado) },
+                enabled = !valoresElemento.isNullOrEmpty()
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.ClearAll,
+                    contentDescription = stringResource(id = R.string.borrar)
+                )
             }
         },
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = { tirarElemento() },
+            ExtendedFloatingActionButton(
+                text = {
+                    Text(
+                        text = stringResource(
+                            id = when (elementoSeleccionado) {
+                                Elemento.Dado -> R.string.tirar_dado
+                                Elemento.Moneda -> R.string.tirar_moneda
+                                Elemento.Rango -> R.string.tirar_rango
+                            }
+                        )
+                    )
+                },
+                icon = {
+                    Icon(
+                        imageVector = Icons.Default.Shuffle,
+                        contentDescription = when (elementoSeleccionado) {
+                            Elemento.Dado -> stringResource(id = R.string.tirar_dado)
+                            Elemento.Moneda -> stringResource(id = R.string.tirar_moneda)
+                            Elemento.Rango -> stringResource(id = R.string.tirar_rango)
+                        }
+                    )
+                },
+                onClick = { tirarElemento(elementoSeleccionado) },
+                expanded = valoresElemento.isNullOrEmpty(),
                 containerColor = BottomAppBarDefaults.bottomAppBarFabColor,
                 elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation()
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Shuffle,
-                    contentDescription = when (elementoSeleccionado) {
-                        Elemento.Dado -> stringResource(id = R.string.tirar_dado)
-                        Elemento.Moneda -> stringResource(id = R.string.tirar_moneda)
-                        Elemento.Rango -> stringResource(id = R.string.tirar_rango)
-                    }
-                )
-            }
+            )
         }
     )
 }
