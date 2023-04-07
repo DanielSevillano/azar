@@ -1,11 +1,14 @@
 package com.daniel.azar
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Shuffle
 import androidx.compose.material.icons.outlined.ClearAll
 import androidx.compose.material.icons.outlined.History
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 
 @Composable
@@ -42,14 +45,13 @@ fun BarraInferior(
                 )
             }
 
-            IconButton(
-                onClick = { borrarValores(elementoSeleccionado) },
-                enabled = !valoresElemento.isNullOrEmpty()
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.ClearAll,
-                    contentDescription = stringResource(id = R.string.borrar)
-                )
+            AnimatedVisibility(visible = !valoresElemento.isNullOrEmpty()) {
+                IconButton(onClick = { borrarValores(elementoSeleccionado) }) {
+                    Icon(
+                        imageVector = Icons.Outlined.ClearAll,
+                        contentDescription = stringResource(id = R.string.borrar)
+                    )
+                }
             }
         },
         floatingActionButton = {
@@ -76,6 +78,7 @@ fun BarraInferior(
                     )
                 },
                 onClick = { tirarElemento(elementoSeleccionado) },
+                modifier = Modifier.animateContentSize(),
                 expanded = valoresElemento.isNullOrEmpty(),
                 containerColor = BottomAppBarDefaults.bottomAppBarFabColor,
                 elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation()
