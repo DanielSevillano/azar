@@ -67,7 +67,7 @@ fun ContenidoRango(
 
         Button(
             onClick = { abrirDialogoRango() },
-            modifier = Modifier.align(Alignment.BottomCenter),
+            modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 4.dp),
         ) {
             Text(text = "$inicioRango - $finalRango")
         }

@@ -80,7 +80,7 @@ fun DialogoRango(
                     singleLine = true
                 )
 
-                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     AssistChip(
                         onClick = {
                             textoInicioRango = "1"
