@@ -16,8 +16,8 @@ fun BarraSuperior(
 ) {
     val coroutineScope = rememberCoroutineScope()
 
-    ScrollableTabRow(selectedTabIndex = estadoPager.currentPage) {
-        if (usarIconos) {
+    if (usarIconos) {
+        ScrollableTabRow(selectedTabIndex = estadoPager.currentPage) {
             Elemento.values().forEachIndexed { indice, elemento ->
                 Tab(
                     selected = indice == estadoPager.currentPage,
@@ -31,7 +31,9 @@ fun BarraSuperior(
                     }
                 )
             }
-        } else {
+        }
+    } else {
+        TabRow(selectedTabIndex = estadoPager.currentPage) {
             Elemento.values().forEachIndexed { indice, elemento ->
                 Tab(
                     selected = indice == estadoPager.currentPage,
@@ -40,6 +42,5 @@ fun BarraSuperior(
                 )
             }
         }
-
     }
 }
