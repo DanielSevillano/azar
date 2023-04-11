@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ContenidoRango(
     pantallaCompacta: Boolean,
@@ -32,7 +33,7 @@ fun ContenidoRango(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Row(
+        FlowRow(
             modifier = if (pantallaCompacta) Modifier
                 .clip(RoundedCornerShape(20.dp))
                 .clickable { tirarElemento() }
@@ -41,7 +42,8 @@ fun ContenidoRango(
                 .clip(RoundedCornerShape(20.dp))
                 .clickable { tirarElemento() }
                 .padding(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             val modificador = Modifier
                 .padding(horizontal = 4.dp)
