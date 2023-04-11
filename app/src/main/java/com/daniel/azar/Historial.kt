@@ -106,6 +106,17 @@ fun Historial(
                                     style = MaterialTheme.typography.displaySmall
                                 )
                             }
+                            Elemento.Letra -> {
+                                Text(
+                                    text = " ${valor.toChar()} ",
+                                    modifier = Modifier
+                                        .widthIn(min = 40.dp)
+                                        .clip(MaterialTheme.shapes.medium)
+                                        .background(MaterialTheme.colorScheme.primaryContainer),
+                                    textAlign = TextAlign.Center,
+                                    style = MaterialTheme.typography.displaySmall
+                                )
+                            }
                             else -> {
                                 Image(
                                     painter = painterResource(id = representarTirada(valor)),

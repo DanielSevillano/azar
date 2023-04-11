@@ -11,10 +11,12 @@ class AzarViewModel : ViewModel() {
     var valoresDado: List<Int>? by mutableStateOf(null)
     var valoresMoneda: List<Int>? by mutableStateOf(null)
     var valoresRango: List<Int>? by mutableStateOf(null)
+    var valoresLetra: List<Int>? by mutableStateOf(null)
 
     private var tiradasDado by mutableStateOf(emptyList<Tirada>())
     private var tiradasMoneda by mutableStateOf(emptyList<Tirada>())
     private var tiradasRango by mutableStateOf(emptyList<Tirada>())
+    private var tiradasLetra by mutableStateOf(emptyList<Tirada>())
 
     var inicioRango by mutableStateOf(1)
     var finalRango by mutableStateOf(10)
@@ -38,6 +40,10 @@ class AzarViewModel : ViewModel() {
                     List(size = numeroElementos.numero) { (inicioRango..finalRango).random() }
                 tiradasRango = tiradasRango + Tirada(valoresRango!!)
             }
+            Elemento.Letra -> {
+                valoresLetra = List(size = numeroElementos.numero) { ('A'..'Z').random().code }
+                tiradasLetra = tiradasLetra + Tirada(valoresLetra!!)
+            }
         }
     }
 
@@ -46,6 +52,7 @@ class AzarViewModel : ViewModel() {
             Elemento.Dado -> valoresDado
             Elemento.Moneda -> valoresMoneda
             Elemento.Rango -> valoresRango
+            Elemento.Letra -> valoresLetra
         }
     }
 
@@ -54,6 +61,7 @@ class AzarViewModel : ViewModel() {
             Elemento.Dado -> tiradasDado
             Elemento.Moneda -> tiradasMoneda
             Elemento.Rango -> tiradasRango
+            Elemento.Letra -> tiradasLetra
         }
     }
 
@@ -95,6 +103,7 @@ class AzarViewModel : ViewModel() {
             Elemento.Dado -> tiradasDado = emptyList()
             Elemento.Moneda -> tiradasMoneda = emptyList()
             Elemento.Rango -> tiradasRango = emptyList()
+            Elemento.Letra -> tiradasLetra = emptyList()
         }
     }
 
@@ -103,6 +112,7 @@ class AzarViewModel : ViewModel() {
             Elemento.Dado -> valoresDado = null
             Elemento.Moneda -> valoresMoneda = null
             Elemento.Rango -> valoresRango = null
+            Elemento.Letra -> valoresLetra = null
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.daniel.azar
+package com.daniel.azar.contenido
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
@@ -14,6 +14,7 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.daniel.azar.R
 
 @Composable
 fun ContenidoDado(

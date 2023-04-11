@@ -1,4 +1,4 @@
-package com.daniel.azar
+package com.daniel.azar.contenido
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background

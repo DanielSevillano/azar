@@ -9,6 +9,10 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.daniel.azar.contenido.ContenidoDado
+import com.daniel.azar.contenido.ContenidoLetra
+import com.daniel.azar.contenido.ContenidoMoneda
+import com.daniel.azar.contenido.ContenidoRango
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -36,8 +40,9 @@ fun Azar(
                 tirarElemento = { elemento -> viewModel.tirarElemento(elemento) },
                 cambiarNumeroSeleccionado = { numero -> viewModel.numeroElementos = numero },
                 abrirHistorial = { historialAbierto = true },
-                valoresElemento = viewModel.valoresElemento(elementoSeleccionado)
-            ) { elemento -> viewModel.borrarValoresElemento(elemento) }
+                valoresElemento = viewModel.valoresElemento(elementoSeleccionado),
+                borrarValores = { elemento -> viewModel.borrarValoresElemento(elemento) }
+            )
         }
     ) { paddingValues ->
         HorizontalPager(
@@ -68,6 +73,12 @@ fun Azar(
                     inicioRango = viewModel.inicioRango,
                     finalRango = viewModel.finalRango,
                     abrirDialogoRango = { dialogoRangoAbierto = true }
+                )
+
+                Elemento.Letra -> ContenidoLetra(
+                    valoresElemento = viewModel.valoresLetra,
+                    gradosRotacion = viewModel.gradosRotacion,
+                    tirarElemento = { viewModel.tirarElemento(Elemento.Letra) }
                 )
             }
         }

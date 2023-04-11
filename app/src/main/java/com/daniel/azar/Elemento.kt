@@ -2,9 +2,7 @@ package com.daniel.azar
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Casino
-import androidx.compose.material.icons.outlined.MonetizationOn
-import androidx.compose.material.icons.outlined.Pin
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.ui.graphics.vector.ImageVector
 
 enum class Elemento(
@@ -22,5 +20,9 @@ enum class Elemento(
     Rango(
         nombre = R.string.elemento_rango,
         icono = Icons.Outlined.Pin
+    ),
+    Letra(
+        nombre = R.string.elemento_letra,
+        icono = Icons.Outlined.FontDownload
     )
 }

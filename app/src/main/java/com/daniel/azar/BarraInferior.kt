@@ -63,6 +63,7 @@ fun BarraInferior(
                                 Elemento.Dado -> R.string.tirar_dado
                                 Elemento.Moneda -> R.string.tirar_moneda
                                 Elemento.Rango -> R.string.tirar_rango
+                                Elemento.Letra -> R.string.tirar_letra
                             }
                         )
                     )
@@ -74,6 +75,7 @@ fun BarraInferior(
                             Elemento.Dado -> stringResource(id = R.string.tirar_dado)
                             Elemento.Moneda -> stringResource(id = R.string.tirar_moneda)
                             Elemento.Rango -> stringResource(id = R.string.tirar_rango)
+                            Elemento.Letra -> stringResource(id = R.string.tirar_letra)
                         }
                     )
                 },

@@ -24,4 +24,6 @@
     <string name="numero_dos">Dos</string>
     <string name="numero_tres">Tres</string>
     <string name="borrar">Borrar</string>
+    <string name="elemento_letra">Letra</string>
+    <string name="tirar_letra">Letra aleatoria</string>
 </resources>
