@@ -23,4 +23,8 @@
     <string name="rango_cancelar">Cancel</string>
     <string name="rango_confirmar">Confirm</string>
     <string name="borrar">Clear</string>
+    <string name="elemento_letra">Letter</string>
+    <string name="tirar_letra">Random letter</string>
+    <string name="elemento_color">Color</string>
+    <string name="tirar_color">Random color</string>
 </resources>

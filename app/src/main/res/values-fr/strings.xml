@@ -23,4 +23,8 @@
     <string name="historial_vacio">Pas d\'historique</string>
     <string name="historial_eliminar">Supprimer l\'historique</string>
     <string name="borrar">Effacer</string>
+    <string name="elemento_letra">Lettre</string>
+    <string name="tirar_letra">Lettre aléatoire</string>
+    <string name="elemento_color">Couleur</string>
+    <string name="tirar_color">Couleur aléatoire</string>
 </resources>

@@ -23,4 +23,8 @@
     <string name="rango_definir">Definire la gamma</string>
     <string name="historial_vacio">Non c\'è cronologia</string>
     <string name="borrar">Cancellare</string>
+    <string name="elemento_letra">Lettera</string>
+    <string name="tirar_letra">Lettera casuale</string>
+    <string name="elemento_color">Colore</string>
+    <string name="tirar_color">Colore casuale</string>
 </resources>
