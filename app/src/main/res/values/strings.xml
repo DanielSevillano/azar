@@ -26,4 +26,6 @@
     <string name="borrar">Borrar</string>
     <string name="elemento_letra">Letra</string>
     <string name="tirar_letra">Letra aleatoria</string>
+    <string name="elemento_color">Color</string>
+    <string name="tirar_color">Color aleatorio</string>
 </resources>

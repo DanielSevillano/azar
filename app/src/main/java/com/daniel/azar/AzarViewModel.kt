@@ -12,11 +12,13 @@ class AzarViewModel : ViewModel() {
     var valoresMoneda: List<Int>? by mutableStateOf(null)
     var valoresRango: List<Int>? by mutableStateOf(null)
     var valoresLetra: List<Int>? by mutableStateOf(null)
+    var valoresColor: List<Int>? by mutableStateOf(null)
 
     private var tiradasDado by mutableStateOf(emptyList<Tirada>())
     private var tiradasMoneda by mutableStateOf(emptyList<Tirada>())
     private var tiradasRango by mutableStateOf(emptyList<Tirada>())
     private var tiradasLetra by mutableStateOf(emptyList<Tirada>())
+    private var tiradasColor by mutableStateOf(emptyList<Tirada>())
 
     var inicioRango by mutableStateOf(1)
     var finalRango by mutableStateOf(10)
@@ -44,6 +46,10 @@ class AzarViewModel : ViewModel() {
                 valoresLetra = List(size = numeroElementos.numero) { ('A'..'Z').random().code }
                 tiradasLetra = tiradasLetra + Tirada(valoresLetra!!)
             }
+            Elemento.Color -> {
+                valoresColor = List(size = numeroElementos.numero) { (0..16777215).random() }
+                tiradasColor = tiradasColor + Tirada(valoresColor!!)
+            }
         }
     }
 
@@ -53,6 +59,7 @@ class AzarViewModel : ViewModel() {
             Elemento.Moneda -> valoresMoneda
             Elemento.Rango -> valoresRango
             Elemento.Letra -> valoresLetra
+            Elemento.Color -> valoresColor
         }
     }
 
@@ -62,6 +69,7 @@ class AzarViewModel : ViewModel() {
             Elemento.Moneda -> tiradasMoneda
             Elemento.Rango -> tiradasRango
             Elemento.Letra -> tiradasLetra
+            Elemento.Color -> tiradasColor
         }
     }
 
@@ -104,6 +112,7 @@ class AzarViewModel : ViewModel() {
             Elemento.Moneda -> tiradasMoneda = emptyList()
             Elemento.Rango -> tiradasRango = emptyList()
             Elemento.Letra -> tiradasLetra = emptyList()
+            Elemento.Color -> tiradasColor = emptyList()
         }
     }
 
@@ -113,6 +122,7 @@ class AzarViewModel : ViewModel() {
             Elemento.Moneda -> valoresMoneda = null
             Elemento.Rango -> valoresRango = null
             Elemento.Letra -> valoresLetra = null
+            Elemento.Color -> valoresColor = null
         }
     }
 }

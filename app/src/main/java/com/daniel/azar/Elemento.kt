@@ -24,5 +24,9 @@ enum class Elemento(
     Letra(
         nombre = R.string.elemento_letra,
         icono = Icons.Outlined.FontDownload
+    ),
+    Color(
+        nombre = R.string.elemento_color,
+        icono = Icons.Outlined.Palette
     )
 }

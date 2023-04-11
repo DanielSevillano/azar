@@ -9,10 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.daniel.azar.contenido.ContenidoDado
-import com.daniel.azar.contenido.ContenidoLetra
-import com.daniel.azar.contenido.ContenidoMoneda
-import com.daniel.azar.contenido.ContenidoRango
+import com.daniel.azar.contenido.*
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -79,6 +76,12 @@ fun Azar(
                     valoresElemento = viewModel.valoresLetra,
                     gradosRotacion = viewModel.gradosRotacion,
                     tirarElemento = { viewModel.tirarElemento(Elemento.Letra) }
+                )
+
+                Elemento.Color -> ContenidoColor(
+                    valoresElemento = viewModel.valoresColor,
+                    gradosRotacion = viewModel.gradosRotacion,
+                    tirarElemento = { viewModel.tirarElemento(Elemento.Color) }
                 )
             }
         }

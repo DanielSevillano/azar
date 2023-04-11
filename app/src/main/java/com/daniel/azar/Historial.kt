@@ -15,13 +15,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@OptIn(
+    ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class,
+    ExperimentalLayoutApi::class
+)
 @Composable
 fun Historial(
     cerrarHistorial: () -> Unit,
@@ -89,7 +93,7 @@ fun Historial(
             }
 
             items(tiradasElemento.reversed()) { tirada ->
-                Row(
+                FlowRow(
                     modifier = Modifier.padding(top = 8.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
@@ -115,6 +119,14 @@ fun Historial(
                                         .background(MaterialTheme.colorScheme.primaryContainer),
                                     textAlign = TextAlign.Center,
                                     style = MaterialTheme.typography.displaySmall
+                                )
+                            }
+                            Elemento.Color -> {
+                                Box(
+                                    modifier = Modifier
+                                        .size(40.dp)
+                                        .clip(MaterialTheme.shapes.medium)
+                                        .background(Color(color = valor + 4278190080))
                                 )
                             }
                             else -> {
