@@ -67,7 +67,7 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.1.0-beta02")
     implementation("androidx.compose.material3:material3-window-size-class:1.1.0-beta02")
     implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:1.10.0")
     implementation("androidx.core:core-splashscreen:1.0.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion")
