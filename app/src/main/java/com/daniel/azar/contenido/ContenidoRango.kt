@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ContenidoRango(
-    pantallaCompacta: Boolean,
     valoresElemento: List<Int>?,
     gradosRotacion: Float,
     tirarElemento: () -> Unit,
@@ -34,11 +33,7 @@ fun ContenidoRango(
         contentAlignment = Alignment.Center
     ) {
         FlowRow(
-            modifier = if (pantallaCompacta) Modifier
-                .clip(RoundedCornerShape(20.dp))
-                .clickable { tirarElemento() }
-                .padding(16.dp)
-                .align(Alignment.TopCenter) else Modifier
+            modifier = Modifier
                 .clip(RoundedCornerShape(20.dp))
                 .clickable { tirarElemento() }
                 .padding(16.dp),

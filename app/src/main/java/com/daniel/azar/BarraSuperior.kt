@@ -10,37 +10,22 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun BarraSuperior(
-    estadoPager: PagerState,
-    usarIconos: Boolean
-) {
+fun BarraSuperior(estadoPager: PagerState) {
     val coroutineScope = rememberCoroutineScope()
 
-    if (usarIconos) {
-        ScrollableTabRow(selectedTabIndex = estadoPager.currentPage) {
-            Elemento.values().forEachIndexed { indice, elemento ->
-                Tab(
-                    selected = indice == estadoPager.currentPage,
-                    onClick = { coroutineScope.launch { estadoPager.animateScrollToPage(indice) } },
-                    text = { Text(text = stringResource(id = elemento.nombre)) },
-                    icon = {
-                        Icon(
-                            imageVector = elemento.icono,
-                            contentDescription = stringResource(id = elemento.nombre)
-                        )
-                    }
-                )
-            }
-        }
-    } else {
-        TabRow(selectedTabIndex = estadoPager.currentPage) {
-            Elemento.values().forEachIndexed { indice, elemento ->
-                Tab(
-                    selected = indice == estadoPager.currentPage,
-                    onClick = { coroutineScope.launch { estadoPager.animateScrollToPage(indice) } },
-                    text = { Text(text = stringResource(id = elemento.nombre)) }
-                )
-            }
+    ScrollableTabRow(selectedTabIndex = estadoPager.currentPage) {
+        Elemento.values().forEachIndexed { indice, elemento ->
+            LeadingIconTab(
+                selected = indice == estadoPager.currentPage,
+                onClick = { coroutineScope.launch { estadoPager.animateScrollToPage(indice) } },
+                text = { Text(text = stringResource(id = elemento.nombre)) },
+                icon = {
+                    Icon(
+                        imageVector = elemento.icono,
+                        contentDescription = stringResource(id = elemento.nombre)
+                    )
+                }
+            )
         }
     }
 }

@@ -13,10 +13,7 @@ import com.daniel.azar.contenido.*
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
-fun Azar(
-    pantallaCompacta: Boolean,
-    viewModel: AzarViewModel = viewModel()
-) {
+fun Azar(viewModel: AzarViewModel = viewModel()) {
     val estadoPager = rememberPagerState()
     var historialAbierto by rememberSaveable { mutableStateOf(false) }
     var dialogoRangoAbierto by rememberSaveable { mutableStateOf(false) }
@@ -26,8 +23,7 @@ fun Azar(
     Scaffold(
         topBar = {
             BarraSuperior(
-                estadoPager = estadoPager,
-                usarIconos = !pantallaCompacta
+                estadoPager = estadoPager
             )
         },
         bottomBar = {
@@ -63,14 +59,12 @@ fun Azar(
                 )
 
                 Elemento.Rango -> ContenidoRango(
-                    pantallaCompacta = pantallaCompacta,
                     valoresElemento = viewModel.valoresRango,
                     gradosRotacion = viewModel.gradosRotacion,
                     tirarElemento = { viewModel.tirarElemento(Elemento.Rango) },
                     inicioRango = viewModel.inicioRango,
-                    finalRango = viewModel.finalRango,
-                    abrirDialogoRango = { dialogoRangoAbierto = true }
-                )
+                    finalRango = viewModel.finalRango
+                ) { dialogoRangoAbierto = true }
 
                 Elemento.Letra -> ContenidoLetra(
                     valoresElemento = viewModel.valoresLetra,
