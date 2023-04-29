@@ -3,7 +3,12 @@ package com.daniel.azar.contenido
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,10 +19,12 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.daniel.azar.Elemento
 import com.daniel.azar.R
 
 @Composable
-fun ContenidoMoneda(
+fun ContenidoImagen(
+    elemento: Elemento,
     valoresElemento: List<Int>?,
     representarValores: (Int) -> Int,
     gradosRotacion: Float,
@@ -44,14 +51,24 @@ fun ContenidoMoneda(
             if (valoresElemento.isNullOrEmpty()) {
                 Image(
                     painter = painterResource(id = representarValores(0)),
-                    contentDescription = stringResource(id = R.string.tirar_moneda),
+                    contentDescription = stringResource(
+                        id = if (elemento == Elemento.Dado)
+                            R.string.tirar_dado
+                        else
+                            R.string.tirar_moneda
+                    ),
                     modifier = modificador
                 )
             } else {
                 valoresElemento.forEach { valor ->
                     Image(
                         painter = painterResource(id = representarValores(valor)),
-                        contentDescription = stringResource(id = R.string.elemento_moneda) + "$valor",
+                        contentDescription = stringResource(
+                            id = if (elemento == Elemento.Dado)
+                                R.string.elemento_dado
+                        else
+                            R.string.elemento_moneda
+                        ) + "$valor",
                         modifier = modificador
                     )
                 }

@@ -44,14 +44,16 @@ fun Azar(viewModel: AzarViewModel = viewModel()) {
             state = estadoPager
         ) { indice ->
             when (Elemento.values()[indice]) {
-                Elemento.Dado -> ContenidoDado(
+                Elemento.Dado -> ContenidoImagen(
+                    elemento = Elemento.Dado,
                     valoresElemento = viewModel.valoresDado,
                     representarValores = { n -> viewModel.representarDado(n) },
                     gradosRotacion = viewModel.gradosRotacion,
                     tirarElemento = { viewModel.tirarElemento(Elemento.Dado) }
                 )
 
-                Elemento.Moneda -> ContenidoMoneda(
+                Elemento.Moneda -> ContenidoImagen(
+                    elemento = Elemento.Moneda,
                     valoresElemento = viewModel.valoresMoneda,
                     representarValores = { n -> viewModel.representarMoneda(n) },
                     gradosRotacion = viewModel.gradosRotacion,
@@ -63,8 +65,9 @@ fun Azar(viewModel: AzarViewModel = viewModel()) {
                     gradosRotacion = viewModel.gradosRotacion,
                     tirarElemento = { viewModel.tirarElemento(Elemento.Rango) },
                     inicioRango = viewModel.inicioRango,
-                    finalRango = viewModel.finalRango
-                ) { dialogoRangoAbierto = true }
+                    finalRango = viewModel.finalRango,
+                    abrirDialogoRango =  { dialogoRangoAbierto = true }
+                )
 
                 Elemento.Letra -> ContenidoLetra(
                     valoresElemento = viewModel.valoresLetra,
