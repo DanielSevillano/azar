@@ -1,6 +1,7 @@
 package com.daniel.azar
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -8,6 +9,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.daniel.azar.contenido.*
 
@@ -40,7 +42,14 @@ fun Azar(viewModel: AzarViewModel = viewModel()) {
     ) { paddingValues ->
         HorizontalPager(
             pageCount = Elemento.values().size,
-            modifier = Modifier.padding(paddingValues),
+            modifier = Modifier
+                .padding(paddingValues)
+                .pointerInput(Unit) {
+                    detectVerticalDragGestures { change, dragAmount ->
+                        change.consume()
+                        if (dragAmount < 0) historialAbierto = true
+                    }
+                },
             state = estadoPager
         ) { indice ->
             when (Elemento.values()[indice]) {
@@ -66,7 +75,7 @@ fun Azar(viewModel: AzarViewModel = viewModel()) {
                     tirarElemento = { viewModel.tirarElemento(Elemento.Rango) },
                     inicioRango = viewModel.inicioRango,
                     finalRango = viewModel.finalRango,
-                    abrirDialogoRango =  { dialogoRangoAbierto = true }
+                    abrirDialogoRango = { dialogoRangoAbierto = true }
                 )
 
                 Elemento.Letra -> ContenidoLetra(
