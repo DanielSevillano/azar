@@ -1,5 +1,6 @@
 package com.daniel.azar
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -66,11 +67,13 @@ fun Historial(
 
                             Spacer(modifier = Modifier.weight(1f))
 
-                            FilledTonalIconButton(onClick = { eliminarHistorial() }) {
-                                Icon(
-                                    imageVector = Icons.Outlined.Delete,
-                                    contentDescription = stringResource(id = R.string.historial_eliminar)
-                                )
+                            AnimatedVisibility(visible = tiradasElemento.isNotEmpty()) {
+                                FilledTonalIconButton(onClick = { eliminarHistorial() }) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Delete,
+                                        contentDescription = stringResource(id = R.string.historial_eliminar)
+                                    )
+                                }
                             }
                         }
 
