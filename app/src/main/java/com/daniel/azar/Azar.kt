@@ -16,21 +16,21 @@ import com.daniel.azar.contenido.*
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun Azar(viewModel: AzarViewModel = viewModel()) {
-    val estadoPager = rememberPagerState()
+    val pagerState = rememberPagerState(pageCount = { Elemento.entries.size })
     var historialAbierto by rememberSaveable { mutableStateOf(false) }
     var dialogoRangoAbierto by rememberSaveable { mutableStateOf(false) }
     val estadoHistorial = rememberModalBottomSheetState()
-    val elementoSeleccionado = Elemento.values()[estadoPager.currentPage]
+    val elementoSeleccionado = Elemento.entries[pagerState.currentPage]
 
     Scaffold(
         topBar = {
             BarraSuperior(
-                estadoPager = estadoPager
+                estadoPager = pagerState
             )
         },
         bottomBar = {
             BarraInferior(
-                elementoSeleccionado = Elemento.values()[estadoPager.currentPage],
+                elementoSeleccionado = Elemento.entries[pagerState.currentPage],
                 numeroSeleccionado = viewModel.numeroElementos,
                 tirarElemento = { elemento -> viewModel.tirarElemento(elemento) },
                 cambiarNumeroSeleccionado = { numero -> viewModel.numeroElementos = numero },
@@ -41,7 +41,7 @@ fun Azar(viewModel: AzarViewModel = viewModel()) {
         }
     ) { paddingValues ->
         HorizontalPager(
-            pageCount = Elemento.values().size,
+            state = pagerState,
             modifier = Modifier
                 .padding(paddingValues)
                 .pointerInput(Unit) {
@@ -49,10 +49,9 @@ fun Azar(viewModel: AzarViewModel = viewModel()) {
                         change.consume()
                         if (dragAmount < 0) historialAbierto = true
                     }
-                },
-            state = estadoPager
+                }
         ) { indice ->
-            when (Elemento.values()[indice]) {
+            when (Elemento.entries[indice]) {
                 Elemento.Dado -> ContenidoImagen(
                     elemento = Elemento.Dado,
                     valoresElemento = viewModel.valoresDado,
@@ -96,7 +95,7 @@ fun Azar(viewModel: AzarViewModel = viewModel()) {
             Historial(
                 cerrarHistorial = { historialAbierto = false },
                 estadoHistorial = estadoHistorial,
-                elementoSeleccionado = Elemento.values()[estadoPager.currentPage],
+                elementoSeleccionado = Elemento.entries[pagerState.currentPage],
                 tiradasElemento = viewModel.tiradasElemento(elementoSeleccionado),
                 representarTirada = viewModel.representarTirada(elementoSeleccionado),
                 eliminarHistorial = { viewModel.eliminarHistorialElemento(elementoSeleccionado) }
