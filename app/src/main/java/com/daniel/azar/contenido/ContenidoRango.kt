@@ -38,7 +38,7 @@ fun ContenidoRango(
                 .clickable { tirarElemento() }
                 .padding(16.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalArrangement = Arrangement.Center
         ) {
             val modificador = Modifier
                 .padding(horizontal = 4.dp)

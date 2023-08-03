@@ -35,7 +35,7 @@ fun ContenidoColor(
                 .clickable { tirarElemento() }
                 .padding(16.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalArrangement = Arrangement.Center
         ) {
             val modificador = Modifier
                 .size(80.dp)
