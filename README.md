@@ -13,7 +13,7 @@ Está escrita en Jetpack Compose con Material Design 3 y color dinámico.
 
 ## 📸 Capturas
 
-<div align="center" style="width: 100%;">
+<div style="width: 100%;">
     <img src="https://user-images.githubusercontent.com/68847306/185915043-439e6cfe-de3d-428e-a61d-d12de3dc008e.jpg" alt="Captura dado 1" width="35%">
     <img src="https://user-images.githubusercontent.com/68847306/185915048-b98f7fe7-0dda-45d8-8d5f-607ef64829fc.jpg" alt="Captura dado 2" width="35%">
     <img src="https://user-images.githubusercontent.com/68847306/185915051-5aa2fa93-acf0-42b4-8f00-cec9126d2ddd.jpg" alt="Captura moneda" width="35%">

@@ -11,7 +11,6 @@
     <string name="tirar_rango">Random number</string>
 
     <string name="historial">History</string>
-    <string name="cerrar">Close</string>
     <string name="rango_inicio">Beginning</string>
     <string name="rango_final">End</string>
     <string name="historial_eliminar">Delete history</string>

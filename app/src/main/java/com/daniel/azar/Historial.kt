@@ -77,7 +77,7 @@ fun Historial(
                             }
                         }
 
-                        Divider(
+                        HorizontalDivider(
                             modifier = Modifier
                                 .padding(top = 6.dp)
                                 .alpha(0.2F)

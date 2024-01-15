@@ -3,7 +3,13 @@ package com.daniel.azar.contenido
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -14,7 +20,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
-import java.util.*
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -23,7 +28,10 @@ fun ContenidoColor(
     gradosRotacion: Float,
     tirarElemento: () -> Unit
 ) {
-    val rotacion by animateFloatAsState(targetValue = gradosRotacion)
+    val rotacion by animateFloatAsState(
+        targetValue = gradosRotacion,
+        label = "rotacion"
+    )
 
     Box(
         modifier = Modifier.fillMaxSize(),

@@ -1,6 +1,8 @@
 package com.daniel.azar
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -20,10 +22,10 @@ class AzarViewModel : ViewModel() {
     private var tiradasLetra by mutableStateOf(emptyList<Tirada>())
     private var tiradasColor by mutableStateOf(emptyList<Tirada>())
 
-    var inicioRango by mutableStateOf(1)
-    var finalRango by mutableStateOf(10)
+    var inicioRango by mutableIntStateOf(1)
+    var finalRango by mutableIntStateOf(10)
 
-    var gradosRotacion by mutableStateOf(0F)
+    var gradosRotacion by mutableFloatStateOf(0F)
 
     fun tirarElemento(elemento: Elemento) {
         gradosRotacion += 360f

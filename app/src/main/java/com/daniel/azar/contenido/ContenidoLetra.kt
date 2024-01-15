@@ -21,7 +21,10 @@ fun ContenidoLetra(
     gradosRotacion: Float,
     tirarElemento: () -> Unit
 ) {
-    val rotacion by animateFloatAsState(targetValue = gradosRotacion)
+    val rotacion by animateFloatAsState(
+        targetValue = gradosRotacion,
+        label = "rotacion"
+    )
 
     Box(
         modifier = Modifier.fillMaxSize(),
