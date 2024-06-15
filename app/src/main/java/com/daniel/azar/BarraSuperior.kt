@@ -1,28 +1,29 @@
 package com.daniel.azar
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.pager.PagerState
-import androidx.compose.material3.*
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LeadingIconTab
+import androidx.compose.material3.PrimaryScrollableTabRow
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun BarraSuperior(estadoPager: PagerState) {
     val coroutineScope = rememberCoroutineScope()
 
-    ScrollableTabRow(
+    PrimaryScrollableTabRow(
         selectedTabIndex = estadoPager.currentPage,
-        indicator = @Composable { tabPositions ->
-            TabRowDefaults.PrimaryIndicator(
-                modifier = Modifier.tabIndicatorOffset(tabPositions[estadoPager.currentPage]),
-                width = tabPositions[estadoPager.currentPage].contentWidth
-            )
-        }
+        modifier = Modifier.windowInsetsPadding(WindowInsets.statusBars)
     ) {
         Elemento.entries.forEachIndexed { indice, elemento ->
             LeadingIconTab(
