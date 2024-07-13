@@ -15,8 +15,8 @@ actual fun getColorScheme(darkTheme: Boolean): ColorScheme {
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
 
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        darkTheme -> darkScheme
+        else -> lightScheme
     }
 
     return colorScheme

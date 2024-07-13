@@ -5,6 +5,6 @@ import androidx.compose.runtime.Composable
 
 @Composable
 actual fun getColorScheme(darkTheme: Boolean): ColorScheme {
-    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
+    val colorScheme = if (darkTheme) darkScheme else lightScheme
     return colorScheme
 }
