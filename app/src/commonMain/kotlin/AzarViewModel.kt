@@ -18,7 +18,7 @@ import azar.app.generated.resources.moneda
 import org.jetbrains.compose.resources.DrawableResource
 
 class AzarViewModel : ViewModel() {
-    var numeroElementos by mutableStateOf(Numero.Uno)
+    var numeroElementos by mutableIntStateOf(1)
 
     var valoresDado: List<Int>? by mutableStateOf(null)
     var valoresMoneda: List<Int>? by mutableStateOf(null)
@@ -42,28 +42,28 @@ class AzarViewModel : ViewModel() {
 
         when (elemento) {
             Elemento.Dado -> {
-                valoresDado = List(size = numeroElementos.numero) { (1..6).random() }
+                valoresDado = List(size = numeroElementos) { (1..6).random() }
                 tiradasDado = tiradasDado + Tirada(valoresDado!!)
             }
 
             Elemento.Moneda -> {
-                valoresMoneda = List(size = numeroElementos.numero) { (1..2).random() }
+                valoresMoneda = List(size = numeroElementos) { (1..2).random() }
                 tiradasMoneda = tiradasMoneda + Tirada(valoresMoneda!!)
             }
 
             Elemento.Rango -> {
                 valoresRango =
-                    List(size = numeroElementos.numero) { (inicioRango..finalRango).random() }
+                    List(size = numeroElementos) { (inicioRango..finalRango).random() }
                 tiradasRango = tiradasRango + Tirada(valoresRango!!)
             }
 
             Elemento.Letra -> {
-                valoresLetra = List(size = numeroElementos.numero) { ('A'..'Z').random().code }
+                valoresLetra = List(size = numeroElementos) { ('A'..'Z').random().code }
                 tiradasLetra = tiradasLetra + Tirada(valoresLetra!!)
             }
 
             Elemento.Color -> {
-                valoresColor = List(size = numeroElementos.numero) { (0..16777215).random() }
+                valoresColor = List(size = numeroElementos) { (0..16777215).random() }
                 tiradasColor = tiradasColor + Tirada(valoresColor!!)
             }
         }

@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,10 +25,7 @@ import androidx.compose.ui.unit.dp
 fun ContenidoRango(
     valoresElemento: List<Int>?,
     gradosRotacion: Float,
-    tirarElemento: () -> Unit,
-    inicioRango: Int,
-    finalRango: Int,
-    abrirDialogoRango: () -> Unit
+    tirarElemento: () -> Unit
 ) {
     val rotacion by animateFloatAsState(
         targetValue = gradosRotacion,
@@ -68,13 +64,6 @@ fun ContenidoRango(
                     )
                 }
             }
-        }
-
-        Button(
-            onClick = { abrirDialogoRango() },
-            modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 4.dp),
-        ) {
-            Text(text = "$inicioRango - $finalRango")
         }
     }
 }

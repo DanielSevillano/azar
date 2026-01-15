@@ -1,4 +1,3 @@
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -20,6 +19,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.History
+import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.HorizontalDivider
@@ -27,7 +27,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetState
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -69,43 +68,48 @@ fun Historial(
                 .fillMaxWidth()
                 .animateContentSize(),
             contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 20.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(space = 12.dp)
         ) {
             stickyHeader {
-                Surface {
-                    Column {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.History,
-                                contentDescription = stringResource(resource = Res.string.historial)
-                            )
+                Column(
+                    modifier = Modifier.background(color = BottomSheetDefaults.ContainerColor)
+                ) {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(space = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.History,
+                            contentDescription = stringResource(resource = Res.string.historial)
+                        )
 
-                            Text(
-                                text = stringResource(resource = Res.string.historial),
-                                style = MaterialTheme.typography.titleLarge
-                            )
+                        Text(
+                            text = stringResource(resource = Res.string.historial),
+                            style = MaterialTheme.typography.titleLarge
+                        )
 
-                            Spacer(modifier = Modifier.weight(1f))
+                        Spacer(modifier = Modifier.weight(weight = 1f))
 
-                            AnimatedVisibility(visible = tiradasElemento.isNotEmpty()) {
-                                FilledTonalIconButton(onClick = { eliminarHistorial() }) {
-                                    Icon(
-                                        imageVector = Icons.Outlined.Delete,
-                                        contentDescription = stringResource(resource = Res.string.historial_eliminar)
-                                    )
+                        if (tiradasElemento.isNotEmpty()) {
+                            FilledTonalIconButton(
+                                onClick = {
+                                    cerrarHistorial()
+                                    eliminarHistorial()
                                 }
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Delete,
+                                    contentDescription = stringResource(resource = Res.string.historial_eliminar)
+                                )
                             }
                         }
-
-                        HorizontalDivider(
-                            modifier = Modifier
-                                .padding(top = 6.dp)
-                                .alpha(0.2F)
-                        )
                     }
+
+                    HorizontalDivider(
+                        modifier = Modifier
+                            .padding(top = 6.dp)
+                            .alpha(alpha = 0.2F)
+                    )
                 }
             }
 
@@ -121,10 +125,10 @@ fun Historial(
                 }
             }
 
-            items(tiradasElemento.reversed()) { tirada ->
+            items(items = tiradasElemento.reversed()) { tirada ->
                 FlowRow(
                     modifier = Modifier.padding(top = 8.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(space = 8.dp)
                 ) {
                     tirada.valoresObtenidos.forEach { valor ->
                         when (elementoSeleccionado) {
@@ -133,8 +137,8 @@ fun Historial(
                                     text = " $valor ",
                                     modifier = Modifier
                                         .widthIn(min = 40.dp)
-                                        .clip(MaterialTheme.shapes.medium)
-                                        .background(MaterialTheme.colorScheme.primaryContainer),
+                                        .clip(shape = MaterialTheme.shapes.medium)
+                                        .background(color = MaterialTheme.colorScheme.primaryContainer),
                                     textAlign = TextAlign.Center,
                                     style = MaterialTheme.typography.displaySmall
                                 )
@@ -145,8 +149,8 @@ fun Historial(
                                     text = " ${valor.toChar()} ",
                                     modifier = Modifier
                                         .widthIn(min = 40.dp)
-                                        .clip(MaterialTheme.shapes.medium)
-                                        .background(MaterialTheme.colorScheme.primaryContainer),
+                                        .clip(shape = MaterialTheme.shapes.medium)
+                                        .background(color = MaterialTheme.colorScheme.primaryContainer),
                                     textAlign = TextAlign.Center,
                                     style = MaterialTheme.typography.displaySmall
                                 )
@@ -155,8 +159,8 @@ fun Historial(
                             Elemento.Color -> {
                                 Box(
                                     modifier = Modifier
-                                        .size(40.dp)
-                                        .clip(MaterialTheme.shapes.medium)
+                                        .size(size = 40.dp)
+                                        .clip(shape = MaterialTheme.shapes.medium)
                                         .background(Color(color = valor + 4278190080))
                                 )
                             }
