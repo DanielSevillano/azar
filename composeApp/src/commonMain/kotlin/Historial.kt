@@ -37,10 +37,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import azar.app.generated.resources.Res
-import azar.app.generated.resources.historial
-import azar.app.generated.resources.historial_eliminar
-import azar.app.generated.resources.historial_vacio
+import azar.composeapp.generated.resources.Res
+import azar.composeapp.generated.resources.historial
+import azar.composeapp.generated.resources.historial_eliminar
+import azar.composeapp.generated.resources.historial_vacio
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource

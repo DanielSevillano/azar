@@ -4,17 +4,17 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import azar.app.generated.resources.Res
-import azar.app.generated.resources.cara
-import azar.app.generated.resources.cruz
-import azar.app.generated.resources.dado_0
-import azar.app.generated.resources.dado_1
-import azar.app.generated.resources.dado_2
-import azar.app.generated.resources.dado_3
-import azar.app.generated.resources.dado_4
-import azar.app.generated.resources.dado_5
-import azar.app.generated.resources.dado_6
-import azar.app.generated.resources.moneda
+import azar.composeapp.generated.resources.Res
+import azar.composeapp.generated.resources.cara
+import azar.composeapp.generated.resources.cruz
+import azar.composeapp.generated.resources.dado_0
+import azar.composeapp.generated.resources.dado_1
+import azar.composeapp.generated.resources.dado_2
+import azar.composeapp.generated.resources.dado_3
+import azar.composeapp.generated.resources.dado_4
+import azar.composeapp.generated.resources.dado_5
+import azar.composeapp.generated.resources.dado_6
+import azar.composeapp.generated.resources.moneda
 import org.jetbrains.compose.resources.DrawableResource
 
 class AzarViewModel : ViewModel() {

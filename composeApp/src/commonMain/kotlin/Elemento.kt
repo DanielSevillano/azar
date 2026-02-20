@@ -5,12 +5,12 @@ import androidx.compose.material.icons.outlined.MonetizationOn
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.outlined.Pin
 import androidx.compose.ui.graphics.vector.ImageVector
-import azar.app.generated.resources.Res
-import azar.app.generated.resources.elemento_color
-import azar.app.generated.resources.elemento_dado
-import azar.app.generated.resources.elemento_letra
-import azar.app.generated.resources.elemento_moneda
-import azar.app.generated.resources.elemento_rango
+import azar.composeapp.generated.resources.Res
+import azar.composeapp.generated.resources.elemento_color
+import azar.composeapp.generated.resources.elemento_dado
+import azar.composeapp.generated.resources.elemento_letra
+import azar.composeapp.generated.resources.elemento_moneda
+import azar.composeapp.generated.resources.elemento_rango
 import org.jetbrains.compose.resources.StringResource
 
 enum class Elemento(

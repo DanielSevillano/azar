@@ -18,11 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.unit.dp
-import azar.app.generated.resources.Res
-import azar.app.generated.resources.elemento_dado
-import azar.app.generated.resources.elemento_moneda
-import azar.app.generated.resources.tirar_dado
-import azar.app.generated.resources.tirar_moneda
+import azar.composeapp.generated.resources.Res
+import azar.composeapp.generated.resources.elemento_dado
+import azar.composeapp.generated.resources.elemento_moneda
+import azar.composeapp.generated.resources.tirar_dado
+import azar.composeapp.generated.resources.tirar_moneda
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
